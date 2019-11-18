@@ -24,8 +24,8 @@ export const LEAVE_BOOK = 'LEAVE_BOOK';
 export const FOCUS_BOOK = 'FOCUS_BOOK';
 
 export const logout = () => ({type:LOGOUT});
-export const LEAVE_BOOK = () => ({type:LEAVE_BOOK});
-export const FOCUS_BOOK = () => ({type:LEAVE_BOOK});
+export const leaveBook = () => ({type:LEAVE_BOOK});
+export const focusBook = () => ({type:LEAVE_BOOK});
 // HOME PAGE ACTIONS
 export const DELETE_BOOK_REQUEST;
 export const DELETE_BOOK_SUCCESS;
