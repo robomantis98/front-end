@@ -74,7 +74,7 @@ function Home() {
             {searchbutton ? Search() : <button className="SearchButton" onClick={() => setSearchButton(true)}>Search</button>}
             
                 
-                {searchbutton === true && search == "" ?  <div><button onClick={() => setSearchButton(false)} className="SearchButton" >Back</button></div> : console.log('searching')}
+                {searchbutton === true && search === "" ?  <div><button onClick={() => setSearchButton(false)} className="SearchButton" >Back</button></div> : console.log('searching')}
                 {searchbutton ? 
                     
                     
