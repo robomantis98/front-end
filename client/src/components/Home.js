@@ -5,10 +5,22 @@ import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 // import {faNode} from '@fortawesome/free-regular-svg-icons'
 import { faBookReader} from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components';
+
 const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
 const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
+
+
+const HomeCard = styled.div`
+    backgroundColor: blue; 
+    width: 200px; 
+    height: 600px; 
+    box-shadow: 5px 5px 5px 5px grey; 
+
+
+`
 function Home() {
     // const [Home, setHome] = useState(BookData);
     const [search, setSearch] = useState(""); 
@@ -83,14 +95,14 @@ function Home() {
                             return (
                                 <div key={index} style={{width: `300px`}}>
                                     {element}
-                                    <div>
+                                    <HomeCard>
                                         
                                         
                                         <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
                                         <h3>{item.author}</h3>
                                         <h4>{item.price}</h4>
                                         <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
-                                    </div>
+                                    </HomeCard>
                                 </div>
                             )
                         })}
