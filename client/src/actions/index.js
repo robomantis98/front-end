@@ -27,9 +27,9 @@ export const logout = () => ({type:LOGOUT});
 export const leaveBook = () => ({type:LEAVE_BOOK});
 export const focusBook = () => ({type:LEAVE_BOOK});
 // HOME PAGE ACTIONS
-export const DELETE_BOOK_REQUEST;
-export const DELETE_BOOK_SUCCESS;
-export const DELETE_BOOK_FAILURE;
+export const DELETE_BOOK_REQUEST = 'DELETE_BOOK_REQUEST';
+export const DELETE_BOOK_SUCCESS = 'DELETE_BOOK_SUCCESS';
+export const DELETE_BOOK_FAILURE = 'DELETE_BOOK_FAILURE';
 
 // Perhaps implement page load actions
 
