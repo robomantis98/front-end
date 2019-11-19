@@ -5,10 +5,10 @@ import {loginRequest} from '../actions'
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { faCheckSquare, faBookOpen } from '@fortawesome/free-solid-svg-icons'
+import { /*faCheckSquare,*/ faBookOpen } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'; 
 const element = <FontAwesomeIcon size="3x" icon={faBookOpen} />
-const element1 = <FontAwesomeIcon size="3x" icon={faCheckSquare} />
+// const element1 = <FontAwesomeIcon size="3x" icon={faCheckSquare} />
 
 const Center = styled.div`
     display: flex; 
@@ -27,16 +27,6 @@ const Column = styled.div`
     margin-bottom: 150px; 
     background-color: #ffeee2;
 `
-const Column2 = styled.div`
-    margin-top: 50px;
-    position: relative;
-    left: -610px;
-    width: 600px;
-    height: 500px;
-    box-shadow: 5px 5px 5px 5px grey;
-    margin-bottom: 150px; 
-`
-
 const InputForm= styled.input`
 
     
@@ -49,14 +39,14 @@ const InputForm= styled.input`
     font-size: 1.5rem; 
     color: grey; 
 `
-const ElementIcon = styled.div`
-    position: relative;
-    top: 300px;
-    left: -300px;
-    marginLeft: -200px;
-    margin-top: -50px;
-    margin-bottom: -50px;
-`
+// const ElementIcon = styled.div`
+//     position: relative;
+//     top: 300px;
+//     left: -300px;
+//     marginLeft: -200px;
+//     margin-top: -50px;
+//     margin-bottom: -50px;
+// `
 const ElementIcon1 = styled.div`
     position: relative;
     top: 150px;

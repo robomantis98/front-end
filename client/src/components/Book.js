@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 const Book = props => {
     return (
         <div>
-            
+            {props.book.title}
         </div>
     );
 }
