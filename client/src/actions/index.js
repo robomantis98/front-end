@@ -31,11 +31,19 @@ export const logout = () => ({type:LOGOUT});
 export const leaveBook = () => ({type:LEAVE_BOOK});
 export const focusBook = () => ({type:LEAVE_BOOK});
 // HOME PAGE ACTIONS
+export const LOAD_BOOKS_REQUEST = 'LOAD_BOOKS_REQUEST';
+export const LOAD_BOOKS_SUCCESS = 'LOAD_BOOKS_SUCCESS';
+export const LOAD_BOOKS_FAILURE = 'LOAD_BOOKS_FAILURE';
 export const DELETE_BOOK_REQUEST = 'DELETE_BOOK_REQUEST';
 export const DELETE_BOOK_SUCCESS = 'DELETE_BOOK_SUCCESS';
 export const DELETE_BOOK_FAILURE = 'DELETE_BOOK_FAILURE';
 
-// Perhaps implement page load actions
+export const loadBooks = () => dispatch => {
+    dispatch({type:LOAD_BOOKS_REQUEST});
+    axiosWithAuth().get('/api/books/')
+        .then(res=>dispatch({type:LOAD_BOOKS_SUCCESS,payload:res}))
+        .catch(err=>dispatch({type:LOAD_BOOKS_FAILURE,payload:err}))
+}
 
 export const deleteBook = id => dispatch => {
     dispatch({type:DELETE_BOOK_FAILURE,payload:id});

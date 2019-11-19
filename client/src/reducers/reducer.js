@@ -8,6 +8,9 @@ import {
     LOGOUT,
     LEAVE_BOOK,
     FOCUS_BOOK,
+    LOAD_BOOKS_REQUEST,
+    LOAD_BOOKS_SUCCESS,
+    LOAD_BOOKS_FAILURE,
     DELETE_BOOK_REQUEST,
     DELETE_BOOK_SUCCESS,
     DELETE_BOOK_FAILURE,
@@ -23,6 +26,7 @@ const initState = {
     currentBook: null,
     error: null,
     isAuthenticating: false,
+    isLoading: false,
     isDeleting: false,
     isReviewing: false,
     books: [],
@@ -54,6 +58,12 @@ const reducer = (state=initState,action) => {
             return { ...state, currentBook: null}
         case FOCUS_BOOK:
             return { ...state, currentBook: action.payload}
+        case LOAD_BOOKS_REQUEST:
+            return {...state, isLoading: true, error: null}
+        case LOAD_BOOKS_SUCCESS:
+            return {...state, isLoading: false, error: null, books:action.payload.data}
+        case LOAD_BOOKS_FAILURE:
+            return {...state, isLoading: false, error: action.payload}
         case DELETE_BOOK_REQUEST: 
             return { ...state, isDeleting: true, error: null }
         case DELETE_BOOK_SUCCESS: 
