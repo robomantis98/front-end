@@ -5,7 +5,8 @@ import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faBookReader} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
-
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import {loadBooks} from '../actions';
 const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
@@ -94,7 +95,28 @@ const BottomLine = styled.div`
     width: 100% 
     height: 20px
 `
-function Home() {
+
+const Container1 = styled.div`
+    display:flex
+    flex-direction: row 
+    justify-content: space-around
+    flex-wrap:wrap
+`
+
+const Container2 = styled.div`
+
+display: flex 
+flex-direction: row 
+justify-content: space-around;
+flex-wrap: wrap 
+margin-top: 20px
+margin-bottom: 20px; 
+
+`
+
+
+
+function Home(props) {
 
     const [search, setSearch] = useState(""); 
     const [results, setResults] = useState([]);
@@ -108,6 +130,20 @@ function Home() {
             
             
         }
+
+        useEffect(() => { 
+            if(props.books.length == 0 && !props.isloading){
+                props.loadBooks()
+                // axiosWithAuth();
+                // .get('/api/books')
+                // .then(response => { 
+                //     console.log(response); 
+                // })
+                // .catch(err => {
+                //     console.log(err);
+                // })
+            }
+        })
         
         useEffect(() => {
             if(search !== ""){
@@ -115,7 +151,7 @@ function Home() {
                     // console.log(search); 
                     return item.title.toLowerCase().includes(search.toLowerCase())
                 });
-                console.log(output); 
+                //console.log(output); 
                 setResults(output); 
             } else if(search === "" || search === " "){
                 // setSearchButton(false);  //uncomment this line to change to default search functionality.
@@ -147,64 +183,68 @@ function Home() {
             {searchbutton ? Search() : <Stylbutton className="SearchButton" onClick={() => setSearchButton(true)}>Search</Stylbutton>}
             
                 
-                {searchbutton === true && search === "" ?  <div><Stylbutton onClick={() => setSearchButton(false)} className="SearchButton" >Back</Stylbutton></div> : console.log('searching')}
-                {searchbutton ? 
-                    
-                    
-                    <div style={{display: `flex`, flexDirection: `row`, justifyContent: `space-around`, flexWrap:`wrap`}}>
-                        {results.map((item, index) => { 
+            {searchbutton === true && search === "" ?  <div><Stylbutton onClick={() => setSearchButton(false)} className="SearchButton" >Back</Stylbutton></div> : console.log('searching')}
+            {searchbutton ? 
+                
+                
+                <Container1>
+                    {/* props.books.length == 0 ? "loading" : props.books.map */}
+                    {results.map((item, index) => { 
+                        return (
+                            <Container2Card key={index} >
+                                
+                                <Home2Card>
+                                    
+                                    {element}
+                                    <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
+                                    <h3>{item.author}</h3>
+                                    <h4>{item.price}</h4>
+                                    <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
+                                    
+                                </Home2Card>
+                            </Container2Card>
+                        )
+                    })}
+                </Container1> 
+            :
+                <Container2>
+                    {BookData.map((item, index) => { 
+                        //shows top results on front page
+                        if(index <4 ){
                             return (
-                                <Container2Card key={index} >
-                                    
-                                    <Home2Card>
-                                        
-                                        {element}
-                                        <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
+                                <Container1Card key={index}>
+                                    {element}
+                                    <Home1Card>
+                                        <Home1img src={item.img}></Home1img>
+                                        <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
                                         <h3>{item.author}</h3>
-                                        <h4>{item.price}</h4>
-                                        <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
+                                        <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
                                         
-                                    </Home2Card>
-                                </Container2Card>
-                            )
-                        })}
-                    </div> 
-                :
-                    <div style={{display: `flex`,flexDirection:`row`, flexWrap: `wrap`, marginTop: `20px`}}>
-                        {BookData.map((item, index) => { 
-                            if(index <7 ){
-                                return (
-                                    <Container1Card key={index}>
-                                        {element}
-                                        <Home1Card>
-                                            <Home1img src={item.img}></Home1img>
-                                            <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
-                                            <h3>{item.author}</h3>
-                                            <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
-                                            
-                                            
-                                        </Home1Card>
                                         
-                                    </Container1Card>
+                                    </Home1Card>
                                     
-                                )
-                            }
-                        })}
-                        <Icondiv>
-                            <div> {element2} </div>
-                            <div> {element3} </div>
-                            <div> {element4} </div>
-                        </Icondiv>
-                        <BottomLine></BottomLine>
-                        <div style={{width: `100%`, textAlign: `center`,marginBottom:`50px`}}> @copyright </div>
-                    </div>    
-                }
+                                </Container1Card>
+                                
+                            )
+                        }
+                    })}
+                    <Icondiv>
+                        <div> {element2} </div>
+                        <div> {element3} </div>
+                        <div> {element4} </div>
+                    </Icondiv>
+                    <BottomLine></BottomLine>
+                    <div style={{width: `100%`, textAlign: `center`,marginBottom:`50px`}}> @copyright </div>
+                </Container2>    
+            }
                 
             
         </div>
     )
 }
 const mapStateToProps = state => {
-    return {}
+    return {
+        books:state.books, isLoading:state.isLoading
+    }
 }
-export default connect(mapStateToProps,{/*actions*/})(Home);
+export default connect(mapStateToProps,{loadBooks})(Home);
