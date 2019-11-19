@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Route, Link} from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -40,6 +39,7 @@ function App() {
       
       <Route path='/home' component={Home}/>
       <Route path='/login' component={Login} />
+      <Route path='/login' component={Register} />
       <Route 
         exact path='/api/book/:id'
         render={props => <BookPage {...props}/>}

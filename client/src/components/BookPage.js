@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {connect} from 'react-redux'; 
-import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 import Review from './Review'
 
 const BookPage = props => {
   const [book, setBook] = useState([]);
 
-  const deleteBook = (item) => {
+  // const deleteBook = (item) => {
 
-  }
+  // }
   
   useEffect(() =>{
+
     const getBooks = (props) => {
       axios
       .get(`/api/books/${props.item.id}`)
@@ -30,7 +30,6 @@ const BookPage = props => {
         
         <div>
             I'm working
-            <Review/>
         </div>
     );
 }
