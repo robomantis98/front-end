@@ -38,6 +38,8 @@ const Column2 = styled.div`
 `
 
 const InputForm= styled.input`
+
+    
     background-color: #d2bba0;
     border: 2px solid #9f7e69;
     margin-left: 10px; 
@@ -84,6 +86,10 @@ const StylButton = styled.button`
     background-color: #d2bba0;
     font-size: 1.3rem;
     border: 2px solid #9f7e69;
+    :active{
+        margin-top:10px;
+        margin-right: 10px;
+    }
 
 `
 
