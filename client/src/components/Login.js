@@ -12,7 +12,8 @@ const element1 = <FontAwesomeIcon size="3x" icon={faCheckSquare} />
 
 const Center = styled.div`
     display: flex; 
-    justify-content: center; 
+    justify-content: center;
+    
 
 `
 const Column = styled.div`
@@ -21,9 +22,10 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: space-around;
     width: 600px;
-    height: 500px;
+    height: 600px;
     box-shadow: 5px 5px 5px 5px grey;
     margin-bottom: 150px; 
+    background-color: #ffeee2;
 `
 const Column2 = styled.div`
     margin-top: 50px;
@@ -36,11 +38,14 @@ const Column2 = styled.div`
 `
 
 const InputForm= styled.input`
-   
-    margin-left: 120px; 
+    background-color: #d2bba0;
+    border: 2px solid #9f7e69;
+    margin-left: 10px; 
     width: 300px;
     height: 50px;
     margin-bottom: 150px;
+    font-size: 1.5rem; 
+    color: grey; 
 `
 const ElementIcon = styled.div`
     position: relative;
@@ -52,25 +57,38 @@ const ElementIcon = styled.div`
 `
 const ElementIcon1 = styled.div`
     position: relative;
-    top: 50px;
+    top: 150px;
     left: -300px;
     marginLeft: -200px;
     margin-top: -50px;
     margin-bottom: -50px;
 `
-const ElementIcon2 = styled.div`
-    position: relative;
-    top: 200px;
-    marginLeft: -200px;
-    margin-top: -50px;
-    margin-bottom: -50px;
+
+const StyledForm = styled.form`
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 100px;
+        margin-top: 100px;
 `
 
+const StylButton = styled.button`
+    position: relative;
+    top: -100px;
+    left: 10px;
+    width: 100px;
+    height: 70px;
+    border-radius: .7rem;
+    border: none 
+    background-color: #d2bba0;
+    font-size: 1.3rem;
+    border: 2px solid #9f7e69;
+
+`
 
 function Login(props){
-    // const [loginPosts, setLoginPosts] = useState({username: "", password: ""}); 
-    // console.log("Props: ",props)
-
+    
       const [formData, setFormData] = useState([
         {
         username: "", 
@@ -83,36 +101,27 @@ function Login(props){
     }
 
 
-    // const submitLogin = (e) => {
-    //     e.preventDefault()
-    //     props.addNewPost(loginPosts)
-    //     console.log("onSubmit", loginPosts)
-    // }
+    
 
     const handleForm = (e) => {
 
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    // const changeLogin = (e) => {
-
-    //     setLoginPosts({e.target.value})
-    // }
     
-    // console.log(loginPosts);
 
 
 
     return (
         <Center>
             <Column>
-                <h2>Login</h2>
-                <ElementIcon1>{element}</ElementIcon1>
-                <ElementIcon>{element}</ElementIcon>
+                <h2 style={{marginTop:`150px` ,color: `#9f7e69`}}>Login</h2>
+                <ElementIcon1 style={{color: `#9f7e69`}}>{element}</ElementIcon1>
+                
                 {/* onSumbit={submitLogin} */}
-                <form onSubmit = {handleSubmit}>  
-                    <label >Username</label>
-                    <input
+                <StyledForm onSubmit = {handleSubmit}>  
+                   
+                    <InputForm
                     
                     name="username"
               
@@ -120,9 +129,9 @@ function Login(props){
                     placeholder= "Username"
                     onChange = {handleForm}
                     />
-                    <ElementIcon2>{element1}</ElementIcon2>
-                    <label >password</label>
-                    <input
+                    
+               
+                    <InputForm
                     
                     name="password"
                     type="password"
@@ -130,11 +139,10 @@ function Login(props){
                     placeholder= "Password"
                     onChange={handleForm}
                     />
-                    <button type="submit">Submit</button>
-                </form>
+                    <StylButton  type="submit">Submit</StylButton>
+                </StyledForm>
             </Column>
-            <Column2>
-            </Column2>
+            
             
         </Center>
     )

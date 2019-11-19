@@ -12,7 +12,8 @@ import styled from 'styled-components';
 const NavBookr = styled.div`
      width: 100%; 
      height: 100px; 
-     background-color: grey; 
+     background-color: #f7ffe0; 
+     
      font-size: 1.8rem; 
      text-decoration: none; 
      display: flex; 
@@ -32,11 +33,11 @@ function App() {
     <div className="App">
       <NavBookr>
         
-        <Link className = "BookrLinks" to = "/home"> Home </Link>
-        <Link to="/login">Login</Link>
-        <Link to="/review">Reviews</Link>
+        <Link className = "BookrLinks"  to = "/"> Home </Link>
+        <Link className = "BookrLinks" to="/login">Login</Link>
+        <Link className = "BookrLinks" to="/review">Reviews</Link>
       </NavBookr>
-      <Route path='/home' component={Home}/>
+      <Route exact path='/' component={Home}/>
       <Route path='/login' component={Login} />
       <Route path='/review' component={Review}/>
       
