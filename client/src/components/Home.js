@@ -112,7 +112,7 @@ function Home() {
         useEffect(() => {
             if(search !== ""){
                 const output = BookData.filter((item) => { 
-                    console.log(search); 
+                    // console.log(search); 
                     return item.title.toLowerCase().includes(search.toLowerCase())
                 });
                 console.log(output); 
@@ -128,7 +128,7 @@ function Home() {
        
         
         
-    console.log("search", search);
+    // console.log("search", search);
     function Search(){
         
         return(<Stylinput className="inputElement"

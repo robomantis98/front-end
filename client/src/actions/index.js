@@ -12,7 +12,7 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const loginRequest = userData =>  dispatch => {
     
     dispatch({type:LOGIN_REQUEST,payload:userData});
-    axios.post('https://bookr-bw-app.herokuapp.com/api/users/register',userData)
+    axios.post('https://bookr-bw-app.herokuapp.com/api/users/login',userData)
         .then(res=>dispatch({type:LOGIN_SUCCESS,payload:res}))
         .catch(err=>dispatch({type:LOGIN_FAILURE,payload:err}));
 }
