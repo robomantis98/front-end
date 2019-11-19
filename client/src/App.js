@@ -36,7 +36,7 @@ function App() {
       <Route path='/login' component={Login} />
       <Route path='/login' component={Register} />
       <Route 
-        path='/book/:id'
+        path='/books/:id'
         render={props => <BookPage {...props}/>}
       />{/**Route convert to PrivateRoute */}
       <Route 
