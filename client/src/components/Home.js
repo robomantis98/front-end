@@ -3,63 +3,159 @@ import BookData from '../BookData';
 import {connect} from 'react-redux'; 
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-// import {faNode} from '@fortawesome/free-regular-svg-icons'
 import { faBookReader} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
-
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import {loadBooks} from '../actions';
 const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
 const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
 
 
-const HomeCard = styled.div`
-    backgroundColor: blue; 
-    width: 200px; 
-    height: 600px; 
-    box-shadow: 5px 5px 5px 5px grey; 
+const Home2Card = styled.div`
+     
+    width: 300px; 
+    height: 500px; 
+    box-shadow: 2px 5px 5px 2px grey; 
 
 
 `
-function Home() {
-    // const [Home, setHome] = useState(BookData);
+const Home1Card = styled.div`
+     height: 500px;
+     box-shadow: 2px 2px 5px 2px grey;
+
+
+`
+const Container1Card = styled.div`
+    margin-top: 50px; 
+    width: 200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justifyContent: space-around;
+
+
+`
+const Container2Card = styled.div`
+    margin-top: 50px; 
+    width: 300px
+
+
+`
+
+
+
+
+const Home1img = styled.img`
+    margin-top: 20px;
+    width: 100px 
+    objectFit: contain
+    objectPosition: bottom 
+    marginBottom: 30px        
+    paddingBottom: 50px
+
+`
+
+const Stylbutton = styled.button`
+    margin-top: 30px; 
+    border: 1px solid grey; 
+    border-radius: .5rem;
+    width: 130px; 
+    height: 50px; 
+    background-color: #ffeee2;
+    font-size: 1.7rem;
+
+`
+const Stylinput = styled.input`
+    margin-top: 30px; 
+    border: none; 
+    border-radius: .5rem;
+    width: 160px; 
+    height: 50px; 
+    background-color: #ffeee2;
+    font-size: 1.7rem;
+    focus: none;
+    
+
+`
+const Icondiv = styled.div`
+    margin-top: 40px;
+    display: flex
+    justify-content: space-around
+    width:100%
+    textAlign: center
+    marginBottom:50px
+`
+
+const BottomLine = styled.div`
+    margin-top: 50px
+    margin-bottom: 50px 
+    background-color: #ffeee2
+    width: 100% 
+    height: 20px
+`
+
+const Container1 = styled.div`
+    display:flex
+    flex-direction: row 
+    justify-content: space-around
+    flex-wrap:wrap
+`
+
+const Container2 = styled.div`
+
+display: flex 
+flex-direction: row 
+justify-content: space-around;
+flex-wrap: wrap 
+margin-top: 20px
+margin-bottom: 20px; 
+
+`
+
+
+
+function Home(props) {
+
     const [search, setSearch] = useState(""); 
     const [results, setResults] = useState([]);
     const [searchbutton, setSearchButton] = useState(0); 
     
-    
-        // const handleChange = (event) => {
-        //     setSearch(event.target.value);
-        //     if (search != ""){
-        //         const input = Home.filter((item) => {
-        //         return item.title.toLowerCase().includes(search.toLowerCase())
-        //         })
-        //         setResults(input); 
-        //     } else if(search === ""){
-        //         setResults([]); 
-        //         // setSearchButton(true);
-        //     }  
-        // }
         
         function handleChange(event) {
-            // let inputElement = event.target.attributes.getNamedItem('inputElement').value
+          
             
             setSearch(event.target.value); 
             
             
         }
+
+        useEffect(() => { 
+            if(props.books.length == 0 && !props.isloading){
+                props.loadBooks()
+                // axiosWithAuth();
+                // .get('/api/books')
+                // .then(response => { 
+                //     console.log(response); 
+                // })
+                // .catch(err => {
+                //     console.log(err);
+                // })
+            }
+        })
         
         useEffect(() => {
             if(search !== ""){
                 const output = BookData.filter((item) => { 
-                    console.log(search); 
+                    // console.log(search); 
                     return item.title.toLowerCase().includes(search.toLowerCase())
                 });
-                console.log(output); 
+                //console.log(output); 
                 setResults(output); 
             } else if(search === "" || search === " "){
-                setSearchButton(false);
-                // return setResults([])
+                // setSearchButton(false);  //uncomment this line to change to default search functionality.
+                
                 return setResults(BookData)
             }else if(handleChange === false){
                 return setResults(BookData)
@@ -68,81 +164,87 @@ function Home() {
        
         
         
-    console.log("search", search);
+    // console.log("search", search);
     function Search(){
-        // search ? search : setSearch(" ");
-        return(<input className="inputElement"
-                // {search ? search : setSearch(" ")}
+        
+        return(<Stylinput className="inputElement"
+         
                 type="text"
                 value={search}
                 onChange={handleChange}
+                placeholder="   ..."
                 />)
     }
     
     return (
         <div>
             
-            {/* <button onClick={() => setSearchButton(true)}>Search</button> */}
-            {searchbutton ? Search() : <button className="SearchButton" onClick={() => setSearchButton(true)}>Search</button>}
+         
+            {searchbutton ? Search() : <Stylbutton className="SearchButton" onClick={() => setSearchButton(true)}>Search</Stylbutton>}
             
                 
-                {searchbutton === true && search === "" ?  <div><button onClick={() => setSearchButton(false)} className="SearchButton" >Back</button></div> : console.log('searching')}
-                {searchbutton ? 
-                    
-                    
-                    <div style={{display: `flex`, flexDirection: `row`, justifyContent: `space-around`, flexWrap:`wrap`}}>
-                        {results.map((item, index) => { 
-                            return (
-                                <div key={index} style={{width: `300px`}}>
-                                    {element}
-                                    <HomeCard>
-                                        
-                                        
-                                        <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
-                                        <h3>{item.author}</h3>
-                                        <h4>{item.price}</h4>
-                                        <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
-                                    </HomeCard>
-                                </div>
-                            )
-                        })}
-                    </div> 
-                :
-                    <div style={{display: `flex`,flexDirection:`row`, flexWrap: `wrap`, marginTop: `20px`}}>
-                        {BookData.map((item, index) => { 
-                            if(index <7 ){
-                                return (
-                                    <div key={index} style={{width: `200px` ,display:`flex`, flexDirection: `column`, justifyContent: `space-around`}}>
-                                        {element}
-                                        <div style={{height:`600px`}}>
-                                            <img style={{width: `100px` , objectFit: `contain`, objectPosition: `bottom`, marginBottom: `30px`, paddingBottom: `50px`}}src={item.img}></img>
-                                            <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
-                                            <h3>{item.author}</h3>
-                                            <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
-                                            
-                                            
-                                        </div>
-                                        
-                                    </div>
+            {searchbutton === true && search === "" ?  <div><Stylbutton onClick={() => setSearchButton(false)} className="SearchButton" >Back</Stylbutton></div> : console.log('searching')}
+            {searchbutton ? 
+                
+                
+                <Container1>
+                    {/* props.books.length == 0 ? "loading" : props.books.map */}
+                    {results.map((item, index) => { 
+                        return (
+                            <Container2Card key={index} >
+                                
+                                <Home2Card>
                                     
-                                )
-                            }
-                        })}
-                        <div style={{display: `flex`, justifyContent: `space-around`,width: `100%`, textAlign: `center`,marginBottom:`50px`}}>
-                            <div> {element2} </div>
-                            <div> {element3} </div>
-                            <div> {element4} </div>
-                        </div>
-                        <div style={{marginTop: `50px`,marginBottom:`50px`, backgroundColor: `#4DB2AD`, width: `100%`, height: `20px`}}></div>
-                        <div style={{width: `100%`, textAlign: `center`,marginBottom:`50px`}}> @copyright </div>
-                    </div>    
-                }
+                                    {element}
+                                    <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
+                                    <h3>{item.author}</h3>
+                                    <h4>{item.price}</h4>
+                                    <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
+                                    
+                                </Home2Card>
+                            </Container2Card>
+                        )
+                    })}
+                </Container1> 
+            :
+                <Container2>
+                    {BookData.map((item, index) => { 
+                        //shows top results on front page
+                        if(index <4 ){
+                            return (
+                                <Container1Card key={index}>
+                                    {element}
+                                    <Home1Card>
+                                        <Home1img src={item.img}></Home1img>
+                                        <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
+                                        <h3>{item.author}</h3>
+                                        <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
+                                        
+                                        
+                                    </Home1Card>
+                                    
+                                </Container1Card>
+                                
+                            )
+                        }
+                    })}
+                    <Icondiv>
+                        <div> {element2} </div>
+                        <div> {element3} </div>
+                        <div> {element4} </div>
+                    </Icondiv>
+                    <BottomLine></BottomLine>
+                    <div style={{width: `100%`, textAlign: `center`,marginBottom:`50px`}}> @copyright </div>
+                </Container2>    
+            }
                 
             
         </div>
     )
 }
 const mapStateToProps = state => {
-    return {}
+    return {
+        books:state.books, isLoading:state.isLoading
+    }
 }
-export default connect(mapStateToProps,{/*actions*/})(Home);
+export default connect(mapStateToProps,{loadBooks})(Home);

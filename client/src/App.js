@@ -12,7 +12,8 @@ import styled from 'styled-components';
 const NavBookr = styled.div`
      width: 100%; 
      height: 100px; 
-     background-color: grey; 
+     background-color: #f7ffe0; 
+     
      font-size: 1.8rem; 
      text-decoration: none; 
      display: flex; 
