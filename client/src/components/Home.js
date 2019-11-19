@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import BookData from '../BookData';
 import {connect} from 'react-redux'; 
+
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faBookReader} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
+import BookPage from './BookPage';
 
 const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
@@ -159,7 +162,7 @@ function Home() {
                                     <Home2Card>
                                         
                                         {element}
-                                        <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
+                                        <h2 style={{width: `150`, fontSize: '1rem'}}><Link to={`/api/books/${item.id}`}>{item.title}</Link></h2>
                                         <h3>{item.author}</h3>
                                         <h4>{item.price}</h4>
                                         <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
@@ -178,7 +181,7 @@ function Home() {
                                         {element}
                                         <Home1Card>
                                             <Home1img src={item.img}></Home1img>
-                                            <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
+                                            <h2 style={{height: `100px`,fontSize: '1rem'}}><Link to={`/api/books/${item.id}`}>{item.title}</Link></h2>
                                             <h3>{item.author}</h3>
                                             <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
                                             
