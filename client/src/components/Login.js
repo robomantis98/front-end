@@ -147,7 +147,7 @@ function Login(props){
                     onChange={handleForm}
                     />
                     <StylButton  type="submit">Submit</StylButton>
-                </form>
+                </StyledForm>
             </Column>
         </Center>
     )
