@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Link} from 'react-router-dom';
+import PrivateRoute  from './utils/privateRoute';
 import './App.css';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -38,16 +39,22 @@ function App() {
       </NavBookr>
       
       <Route path='/home' component={Home}/>
-      <Route path='/login' component={Login} />
-      <Route path='/login' component={Register} />
-      <Route 
+      <Route path='/login' render={(props) => (
+        <div>
+          <Register { ...props}/>
+          <Login { ...props}/>
+        </div>
+      )} 
+      />
+      
+      <PrivateRoute 
         path='/book/:id'
         render={props => <BookPage {...props}/>}
-      />{/**Route convert to PrivateRoute */}
-      <Route 
+      />
+      <PrivateRoute 
         path='/review/:id'
         render={props=><Review {...props}/>}
-      />{/**Route convert to PrivateRoute */}
+      />
     </div>
   );
 }
