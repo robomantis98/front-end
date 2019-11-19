@@ -30,16 +30,23 @@ function App() {
 
   return (
     <div className="App">
+      
       <NavBookr>
-        
         <Link className = "BookrLinks" to = "/home"> Home </Link>
-        <Link to="/login">Login</Link>
-        <Link to="/review">Reviews</Link>
+        <Link className = "BookrLinks" to="/login">Login</Link>{/**This needs to be log out if logged in*/}
+        <Link className = "BookrLinks" to="/review">Reviews</Link>{/**This won't make sense with our flow */}
       </NavBookr>
+      
       <Route path='/home' component={Home}/>
       <Route path='/login' component={Login} />
-      <Route path='/review' component={Review}/>
-      
+      <Route 
+        path='/book/:id'
+        render={props => <BookPage {...props}/>}
+      />{/**Route convert to PrivateRoute */}
+      <Route 
+        path='/review/:id'
+        render={props=><Review {...props}/>}
+      />{/**Route convert to PrivateRoute */}
     </div>
   );
 }
