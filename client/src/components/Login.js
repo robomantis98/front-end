@@ -115,31 +115,6 @@ function Login(props){
     return (
         <Center>
             <Column>
-<<<<<<< HEAD
-                <h2 style={{marginTop:`150px` ,color: `#9f7e69`}}>Login</h2>
-                <ElementIcon1 style={{color: `#9f7e69`}}>{element}</ElementIcon1>
-                
-                {/* onSumbit={submitLogin} */}
-                <StyledForm onSubmit = {handleSubmit}>  
-                   
-                    <InputForm
-                    
-                    name="username"
-              
-                    type="text"
-                    placeholder= "Username"
-                    onChange = {handleForm}
-                    />
-                    
-               
-                    <InputForm
-                    
-                    name="password"
-                    type="password"
-                
-                    placeholder= "Password"
-                    onChange={handleForm}
-=======
                 <h2>Login</h2>
                 <ElementIcon1>{element}</ElementIcon1>
                 <ElementIcon>{element}</ElementIcon>
@@ -158,19 +133,12 @@ function Login(props){
                         type="password"
                         placeholder= "Password"
                         onChange={handleForm}
->>>>>>> cd65b1e854eea43bc24d99ab3ed342e17d389037
                     />
                     <StylButton  type="submit">Submit</StylButton>
-                </StyledForm>
+                </form>
             </Column>
-<<<<<<< HEAD
             
             
-=======
-            <Column2>
-
-            </Column2>
->>>>>>> cd65b1e854eea43bc24d99ab3ed342e17d389037
         </Center>
     )
 }
