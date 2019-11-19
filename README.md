@@ -5,3 +5,10 @@
 
 - Airtable : https://airtable.com/shrtA1m4LFJAnjvqS/tblI02wuarVEYWVSv/viw2L09271lKsRt5x/rec28K3TrpH0YQe0q?blocks=hide
 
+## Color Pallet
+
+#13293D - Yankees Blue
+#006494 - Sea Blue
+#247BA0 - Lapis Lazuli
+#1B98E0 - Bright Cerulean
+#E8F1F2 - Anti-Flash White
