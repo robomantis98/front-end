@@ -98,10 +98,10 @@ import Book from './Book';
 // `
 function Home(props) {
     const {books,isLoading,loadBooks} = props;
-    const [search/*, setSearch*/] = useState("");
-    // function handleChange(event) {
-    //     setSearch(event.target.value);     
-    // }
+    const [search, setSearch] = useState("");
+    function handleChange(event) {
+        setSearch(event.target.value);     
+    }
         
     useEffect(() => {if(books.length === 0 && !isLoading) {
         loadBooks()
@@ -109,56 +109,14 @@ function Home(props) {
 
     
     return (
-        <div>
-            
+        <div className='Home'>
+            <input type='text' placeholder='Search...' onChange={handleChange}/>
             {books.length !== 0 ? 
                 books
-                    .filter(book => search !== '' ? book.title.toLowerCase()===search.toLowerCase() : true )
+                    .filter(book => search !== '' ? book.title.toLowerCase().includes(search.toLowerCase()) : true )
                     .map((item,i)=><Book key={i} book={item}/>)
                 : <h2>Loading...</h2>
             }
-            {/* {searchbutton ? Search() : <Stylbutton className="SearchButton" onClick={() => setSearchButton(true)}>Search</Stylbutton>}
-            {searchbutton === true && search === "" ?  <div><Stylbutton onClick={() => setSearchButton(false)} className="SearchButton" >Back</Stylbutton></div> : console.log('searching')} */}
-            {/* {searchbutton ? 
-                <div style={{display: `flex`, flexDirection: `row`, justifyContent: `space-around`, flexWrap:`wrap`}}>
-                    {results.map((item, index) => { 
-                        return (
-                            <Container2Card key={index} >   
-                                <Home2Card>
-                                    {element}
-                                    <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
-                                    <h3>{item.author}</h3>
-                                    <h4>{item.price}</h4>
-                                    <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
-                                </Home2Card>
-                            </Container2Card>
-                        )
-                    })}
-                </div> 
-                :
-                <div style={{display: `flex`,flexDirection:`row`, flexWrap: `wrap`, marginTop: `20px`}}>
-                    {BookData.map((item, index) => { 
-                        return (
-                            <Container1Card key={index}>
-                                {element}
-                                <Home1Card>
-                                    <Home1img src={item.img}></Home1img>
-                                    <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
-                                    <h3>{item.author}</h3>
-                                    <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
-                                </Home1Card>
-                            </Container1Card>   
-                        )
-                    })}
-                    <Icondiv>
-                        <div> {element2} </div>
-                        <div> {element3} </div>
-                        <div> {element4} </div>
-                    </Icondiv>
-                    <BottomLine></BottomLine>
-                    <div style={{width: `100%`, textAlign: `center`,marginBottom:`50px`}}> @copyright </div>
-                </div>    
-            } */}
         </div>
     )
 }
