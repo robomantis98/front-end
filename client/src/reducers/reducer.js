@@ -31,12 +31,16 @@ const reducer = (state=initState,action) => {
     switch(action.type){
         case LOGIN_REQUEST:
         case REGISTER_REQUEST:
+            console.log(action.payload);
             return { ...state, isAuthenticating: true, error: null};
         case LOGIN_SUCCESS: 
         case REGISTER_SUCCESS:
-            return { ...state, isAuthenticating: false, error: null, token: action.payload.token, username: action.payload.username};
+            console.log(action.payload);
+            localStorage.setItem('token',action.payload.data.token);
+            return { ...state, isAuthenticating: false, error: null, token: action.payload.data.token, username: action.payload.data.username};
         case LOGIN_FAILURE: 
         case REGISTER_FAILURE:
+            console.log(action.payload);
             return { ...state, isAuthenticating: false, error: action.payload}
         // case REGISTER_REQUEST:
         //     return { ...state, isAuthenticating: true, error: null};

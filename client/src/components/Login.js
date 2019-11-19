@@ -38,6 +38,8 @@ const Column2 = styled.div`
 `
 
 const InputForm= styled.input`
+
+    
     background-color: #d2bba0;
     border: 2px solid #9f7e69;
     margin-left: 10px; 
@@ -84,20 +86,25 @@ const StylButton = styled.button`
     background-color: #d2bba0;
     font-size: 1.3rem;
     border: 2px solid #9f7e69;
+    :active{
+        margin-top:10px;
+        margin-right: 10px;
+    }
 
 `
 
 function Login(props){
     
-      const [formData, setFormData] = useState([
+      const [formData, setFormData] = useState(
         {
         username: "", 
         password: "",
         } 
-    ])
+    )
     const handleSubmit  = (event) => { 
+        console.log('Logging In');
         event.preventDefault(); 
-        loginRequest(formData);
+        props.loginRequest(formData);
     }
 
 
@@ -115,30 +122,33 @@ function Login(props){
     return (
         <Center>
             <Column>
-                <h2>Login</h2>
-                <ElementIcon1>{element}</ElementIcon1>
-                <ElementIcon>{element}</ElementIcon>
-                <form onSubmit = {handleSubmit}>  
-                    <label >Username</label>
-                    <input
-                        name="username"
-                        type="text"
-                        placeholder= "Username"
-                        onChange = {handleForm}
+                <h2 style={{marginTop:`150px` ,color: `#9f7e69`}}>Login</h2>
+                <ElementIcon1 style={{color: `#9f7e69`}}>{element}</ElementIcon1>
+                
+                {/* onSumbit={submitLogin} */}
+                <StyledForm onSubmit = {handleSubmit}>  
+                   
+                    <InputForm
+                    
+                    name="username"
+              
+                    type="text"
+                    placeholder= "Username"
+                    onChange = {handleForm}
                     />
-                    <ElementIcon2>{element1}</ElementIcon2>
-                    <label >password</label>
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder= "Password"
-                        onChange={handleForm}
+                    
+               
+                    <InputForm
+                    
+                    name="password"
+                    type="password"
+                
+                    placeholder= "Password"
+                    onChange={handleForm}
                     />
                     <StylButton  type="submit">Submit</StylButton>
                 </form>
             </Column>
-            
-            
         </Center>
     )
 }
