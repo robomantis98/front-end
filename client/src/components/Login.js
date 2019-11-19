@@ -95,15 +95,16 @@ const StylButton = styled.button`
 
 function Login(props){
     
-      const [formData, setFormData] = useState([
+      const [formData, setFormData] = useState(
         {
         username: "", 
         password: "",
         } 
-    ])
+    )
     const handleSubmit  = (event) => { 
+        console.log('Logging In');
         event.preventDefault(); 
-        loginRequest(formData);
+        props.loginRequest(formData);
     }
 
 
@@ -150,12 +151,16 @@ function Login(props){
             </Column>
             
             
+            
+
         </Center>
     )
 }
-
-// export default Login; 
 const mapStateToProps = state => {
-    return {username: state.username, token: state.token};
+    return {
+        token: state.token,
+        username: state.username,
+        isAuthenticating: state.isAuthenticating
+    };
 }
 export default connect(mapStateToProps,{loginRequest})(Login);
