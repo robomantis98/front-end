@@ -29,6 +29,7 @@ const initState = {
     isLoading: false,
     isDeleting: false,
     isReviewing: false,
+    needUpdate: false,
     books: [],
 }
 const reducer = (state=initState,action) => {
@@ -56,21 +57,24 @@ const reducer = (state=initState,action) => {
         case FOCUS_BOOK:
             return { ...state, currentBook: action.payload}
         case LOAD_BOOKS_REQUEST:
-            return {...state, isLoading: true, error: null}
+            return {...state, needUpdate: false, isLoading: true, error: null}
         case LOAD_BOOKS_SUCCESS:
+            console.log(action.payload.data) 
             return {...state, isLoading: false, error: null, books:action.payload.data}
         case LOAD_BOOKS_FAILURE:
             return {...state, isLoading: false, error: action.payload}
         case DELETE_BOOK_REQUEST: 
             return { ...state, isDeleting: true, error: null }
-        case DELETE_BOOK_SUCCESS: 
-            return { ...state, isDeleting: false, error: null}
+        case DELETE_BOOK_SUCCESS:
+            console.log(action.payload) 
+            return { ...state, needUpdate: true, isDeleting: false, error: null}
         case DELETE_BOOK_FAILURE: 
+            console.log(action.payload)
             return { ...state, isDeleting: false, error: action.payload}
         case SUBMIT_REVIEW_REQUEST:
             return { ...state, isReviewing: true, error: null}
         case SUBMIT_REVIEW_SUCCESS:
-            return { ...state, isReviewing: false, error: null}
+            return { ...state, needUpdate: true, isReviewing: false, error: null}
         case SUBMIT_REVIEW_FAILURE:
             return { ...state, isReviewing: false, error: action.payload}
         default:
