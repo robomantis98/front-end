@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Link} from 'react-router-dom';
 import PrivateRoute  from './utils/privateRoute';
 import './App.css';
-import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import BookPage from './components/BookPage';
@@ -38,17 +37,11 @@ function App() {
         <Link className = "BookrLinks" to="/review">Reviews</Link>{/**This won't make sense with our flow */}
       </NavBookr>
       
-      <Route path='/home' component={Home}/>
-      <Route path='/login' render={(props) => (
-        <div>
-          <Register { ...props}/>
-          <Login { ...props}/>
-        </div>
-      )} 
-      />
+      <PrivateRoute path='/home' component={Home}/>
+      <Route path='/login' component={Login}/>
       
       <PrivateRoute 
-        path='/book/:id'
+        path='/books/:id'
         render={props => <BookPage {...props}/>}
       />
       <PrivateRoute 

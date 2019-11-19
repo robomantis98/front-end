@@ -120,15 +120,15 @@ const SearchBar = styled.input`
     border-radius:5px;
 `;
 function Home(props) {
-    const {books,needUpdate,isLoading,loadBooks} = props;
+    const {books,needUpdate,isLoading,loadBooks, error} = props;
     const [search, setSearch] = useState("");
     function handleChange(event) {
         setSearch(event.target.value);     
     }
         
-    useEffect(() => {if((books.length === 0 && !isLoading) || needUpdate) {
+    useEffect(() => {if((books.length === 0 && !isLoading && !error) || needUpdate) {
         loadBooks()
-    }}, [books,needUpdate,isLoading,loadBooks]);
+    }}, [books,needUpdate,isLoading,loadBooks, error]);
 
     
     return (
@@ -150,7 +150,8 @@ const mapStateToProps = state => {
     return {
         books:state.books,
         isLoading:state.isLoading,
-        needUpdate:state.needUpdate
+        needUpdate:state.needUpdate,
+        error: state.error
     }
 }
 export default connect(mapStateToProps,{loadBooks})(Home);

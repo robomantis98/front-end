@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {loginRequest} from '../actions'
+import {loginRequest, registerRequest} from '../actions'
 
 
 
@@ -91,12 +91,17 @@ function Login(props){
         password: "",
         } 
     )
-    const handleSubmit  = (event) => { 
+    const handleLogin  = (event) => { 
         console.log('Logging In');
         event.preventDefault(); 
         props.loginRequest(formData);
     }
 
+    const handleRegister  = (event) => { 
+        console.log('Registering');
+        event.preventDefault(); 
+        props.registerRequest(formData);
+    }
 
     
 
@@ -116,7 +121,7 @@ function Login(props){
                 <ElementIcon1 style={{color: `#9f7e69`}}>{element}</ElementIcon1>
                 
                 {/* onSumbit={submitLogin} */}
-                <StyledForm onSubmit = {handleSubmit}>  
+                <StyledForm>  
                    
                     <InputForm
                     
@@ -135,8 +140,10 @@ function Login(props){
                 
                     placeholder= "Password"
                     onChange={handleForm}
+                    
                     />
-                    <StylButton  type="submit">Submit</StylButton>
+                    <StylButton onClick={handleLogin}>Sign-In</StylButton>
+                    <StylButton onClick={handleRegister}>Sign-Up</StylButton>
                 </StyledForm>
             </Column>
         </Center>
@@ -149,4 +156,4 @@ const mapStateToProps = state => {
         isAuthenticating: state.isAuthenticating
     };
 }
-export default connect(mapStateToProps,{loginRequest})(Login);
+export default connect(mapStateToProps,{loginRequest, registerRequest})(Login);
