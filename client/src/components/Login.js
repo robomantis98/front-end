@@ -115,6 +115,7 @@ function Login(props){
     return (
         <Center>
             <Column>
+<<<<<<< HEAD
                 <h2 style={{marginTop:`150px` ,color: `#9f7e69`}}>Login</h2>
                 <ElementIcon1 style={{color: `#9f7e69`}}>{element}</ElementIcon1>
                 
@@ -138,18 +139,46 @@ function Login(props){
                 
                     placeholder= "Password"
                     onChange={handleForm}
+=======
+                <h2>Login</h2>
+                <ElementIcon1>{element}</ElementIcon1>
+                <ElementIcon>{element}</ElementIcon>
+                <form onSubmit = {handleSubmit}>  
+                    <label >Username</label>
+                    <input
+                        name="username"
+                        type="text"
+                        placeholder= "Username"
+                        onChange = {handleForm}
+                    />
+                    <ElementIcon2>{element1}</ElementIcon2>
+                    <label >password</label>
+                    <input
+                        name="password"
+                        type="password"
+                        placeholder= "Password"
+                        onChange={handleForm}
+>>>>>>> cd65b1e854eea43bc24d99ab3ed342e17d389037
                     />
                     <StylButton  type="submit">Submit</StylButton>
                 </StyledForm>
             </Column>
+<<<<<<< HEAD
             
             
+=======
+            <Column2>
+
+            </Column2>
+>>>>>>> cd65b1e854eea43bc24d99ab3ed342e17d389037
         </Center>
     )
 }
-
-// export default Login; 
 const mapStateToProps = state => {
-    return {username: state.username, token: state.token};
+    return {
+        token: state.token,
+        username: state.username,
+        isAuthenticating: state.isAuthenticating
+    };
 }
 export default connect(mapStateToProps,{loginRequest})(Login);
