@@ -33,21 +33,12 @@ function App() {
     <div className="App">
       
       <NavBookr>
-<<<<<<< HEAD
-        
-        <Link className = "BookrLinks"  to = "/"> Home </Link>
-        <Link className = "BookrLinks" to="/login">Login</Link>
-        <Link className = "BookrLinks" to="/review">Reviews</Link>
-      </NavBookr>
-      <Route exact path='/' component={Home}/>
-=======
         <Link className = "BookrLinks" to = "/home"> Home </Link>
         <Link className = "BookrLinks" to="/login">Login</Link>{/**This needs to be log out if logged in*/}
         <Link className = "BookrLinks" to="/review">Reviews</Link>{/**This won't make sense with our flow */}
       </NavBookr>
       
       <Route path='/home' component={Home}/>
->>>>>>> cd65b1e854eea43bc24d99ab3ed342e17d389037
       <Route path='/login' component={Login} />
       <Route 
         path='/book/:id'
