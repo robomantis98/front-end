@@ -24,6 +24,7 @@ const Home2Card = styled.div`
 const Home1Card = styled.div`
      height: 500px;
      box-shadow: 2px 2px 5px 2px grey;
+     width: 250px;
 
 
 `
@@ -163,7 +164,7 @@ function Home(props) {
         }, [search ])
        
         
-        
+        console.log("books data", props.books); 
     // console.log("search", search);
     function Search(){
         
@@ -189,6 +190,7 @@ function Home(props) {
                 
                 <Container1>
                     {/* props.books.length == 0 ? "loading" : props.books.map */}
+                    {/*results*/}
                     {results.map((item, index) => { 
                         return (
                             <Container2Card key={index} >
@@ -208,7 +210,9 @@ function Home(props) {
                 </Container1> 
             :
                 <Container2>
-                    {BookData.map((item, index) => { 
+                    {/* props.books.length == 0 ? "loading" : props.books.map */}
+                    {/* BookData */}
+                    {props.books.length == 0 ? "loading" : props.books.map((item, index) => { 
                         //shows top results on front page
                         if(index <4 ){
                             return (
@@ -216,8 +220,9 @@ function Home(props) {
                                     {element}
                                     <Home1Card>
                                         <Home1img src={item.img}></Home1img>
-                                        <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
-                                        <h3>{item.author}</h3>
+                                        <h2 style={{height: `100px`,fontSize: '1.4rem'}}>{item.title}</h2>
+                                        <p>{item.author}</p>
+                                        <h3>{item.description}</h3>
                                         <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
                                         
                                         
