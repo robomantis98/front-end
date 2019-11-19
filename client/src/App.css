@@ -34,3 +34,10 @@
     height: 50px;
     margin-bottom: 150px;
 }
+input:focus, textarea:focus{
+  outline:none;
+}
+button:focus {
+
+  outline: none;
+}
