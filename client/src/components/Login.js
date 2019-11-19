@@ -71,15 +71,16 @@ function Login(props){
     // const [loginPosts, setLoginPosts] = useState({username: "", password: ""}); 
     // console.log("Props: ",props)
 
-      const [formData, setFormData] = useState([
+    const [formData, setFormData] = useState(
         {
         username: "", 
         password: "",
         } 
-    ])
+    )
     const handleSubmit  = (event) => { 
+        console.log('Logging In');
         event.preventDefault(); 
-        loginRequest(formData);
+        props.loginRequest(formData);
     }
 
 
@@ -128,9 +129,9 @@ function Login(props){
                     <button type="submit">Submit</button>
                 </form>
             </Column>
-            <Column2>
+            
+            
 
-            </Column2>
         </Center>
     )
 }
