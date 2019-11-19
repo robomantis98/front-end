@@ -1,3 +1,6 @@
+import axios from 'axios';
+//import axiosWithAuth from '../utils/axiosWithAuth';
+
 // LOGIN PAGE ACTIONS
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -33,9 +36,9 @@ export const DELETE_BOOK_FAILURE = 'DELETE_BOOK_FAILURE';
 
 // Perhaps implement page load actions
 
-export const deleteBook = id => dispatch => {
+export const deleteBook = (id,token) => dispatch => {
     dispatch({type:DELETE_BOOK_FAILURE,payload:id});
-    axios.delete('/api/books/:id')
+    axios.delete('/api/books/:id')//withAuth
         .then(res=>dispatch({type:DELETE_BOOK_SUCCESS,payload:res}))
         .catch(err=>dispatch({type:DELETE_BOOK_FAILURE,payload:err}));
 }
@@ -44,9 +47,9 @@ export const SUBMIT_REVIEW_REQUEST = 'SUBMIT_REVIEW_REQUEST';
 export const SUBMIT_REVIEW_SUCCESS = 'SUBMIT_REVIEW_SUCCESS';
 export const SUBMIT_REVIEW_FAILURE = 'SUBMIT_REVIEW_FAILURE';
 
-export const submitReview = formData => dispatch => {
+export const submitReview = (formData,token) => dispatch => {
     dispatch({type:SUBMIT_REVIEW_REQUEST,payload:formData})
-    axios.post('/api/reviews/:id')
+    axios.post('/api/reviews/:id')//withAuth
         .then(res=>dispatch({type:SUBMIT_REVIEW_SUCCESS,payload:res}))
         .catch(err=>dispatch({type:SUBMIT_REVIEW_FAILURE,payload:err}))
 }

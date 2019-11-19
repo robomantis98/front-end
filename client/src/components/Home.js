@@ -3,34 +3,106 @@ import BookData from '../BookData';
 import {connect} from 'react-redux'; 
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-// import {faNode} from '@fortawesome/free-regular-svg-icons'
 import { faBookReader} from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components';
+
 const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
 const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
+
+
+const Home2Card = styled.div`
+     
+    width: 300px; 
+    height: 500px; 
+    box-shadow: 2px 5px 5px 2px grey; 
+
+
+`
+const Home1Card = styled.div`
+     height: 500px;
+     box-shadow: 2px 2px 5px 2px grey;
+
+
+`
+const Container1Card = styled.div`
+    margin-top: 50px; 
+    width: 200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justifyContent: space-around;
+
+
+`
+const Container2Card = styled.div`
+    margin-top: 50px; 
+    width: 300px
+
+
+`
+
+
+
+
+const Home1img = styled.img`
+    margin-top: 20px;
+    width: 100px 
+    objectFit: contain
+    objectPosition: bottom 
+    marginBottom: 30px        
+    paddingBottom: 50px
+
+`
+
+const Stylbutton = styled.button`
+    margin-top: 30px; 
+    border: 1px solid grey; 
+    border-radius: .5rem;
+    width: 130px; 
+    height: 50px; 
+    background-color: #ffeee2;
+    font-size: 1.7rem;
+
+`
+const Stylinput = styled.input`
+    margin-top: 30px; 
+    border: none; 
+    border-radius: .5rem;
+    width: 160px; 
+    height: 50px; 
+    background-color: #ffeee2;
+    font-size: 1.7rem;
+    focus: none;
+    
+
+`
+const Icondiv = styled.div`
+    margin-top: 40px;
+    display: flex
+    justify-content: space-around
+    width:100%
+    textAlign: center
+    marginBottom:50px
+`
+
+const BottomLine = styled.div`
+    margin-top: 50px
+    margin-bottom: 50px 
+    background-color: #ffeee2
+    width: 100% 
+    height: 20px
+`
 function Home() {
-    // const [Home, setHome] = useState(BookData);
+
     const [search, setSearch] = useState(""); 
     const [results, setResults] = useState([]);
     const [searchbutton, setSearchButton] = useState(0); 
     
-    
-        // const handleChange = (event) => {
-        //     setSearch(event.target.value);
-        //     if (search != ""){
-        //         const input = Home.filter((item) => {
-        //         return item.title.toLowerCase().includes(search.toLowerCase())
-        //         })
-        //         setResults(input); 
-        //     } else if(search === ""){
-        //         setResults([]); 
-        //         // setSearchButton(true);
-        //     }  
-        // }
         
         function handleChange(event) {
-            // let inputElement = event.target.attributes.getNamedItem('inputElement').value
+          
             
             setSearch(event.target.value); 
             
@@ -46,8 +118,8 @@ function Home() {
                 console.log(output); 
                 setResults(output); 
             } else if(search === "" || search === " "){
-                setSearchButton(false);
-                // return setResults([])
+                // setSearchButton(false);  //uncomment this line to change to default search functionality.
+                
                 return setResults(BookData)
             }else if(handleChange === false){
                 return setResults(BookData)
@@ -58,40 +130,42 @@ function Home() {
         
     console.log("search", search);
     function Search(){
-        // search ? search : setSearch(" ");
-        return(<input className="inputElement"
-                // {search ? search : setSearch(" ")}
+        
+        return(<Stylinput className="inputElement"
+         
                 type="text"
                 value={search}
                 onChange={handleChange}
+                placeholder="   ..."
                 />)
     }
     
     return (
         <div>
             
-            {/* <button onClick={() => setSearchButton(true)}>Search</button> */}
-            {searchbutton ? Search() : <button className="SearchButton" onClick={() => setSearchButton(true)}>Search</button>}
+         
+            {searchbutton ? Search() : <Stylbutton className="SearchButton" onClick={() => setSearchButton(true)}>Search</Stylbutton>}
             
                 
-                {searchbutton === true && search === "" ?  <div><button onClick={() => setSearchButton(false)} className="SearchButton" >Back</button></div> : console.log('searching')}
+                {searchbutton === true && search === "" ?  <div><Stylbutton onClick={() => setSearchButton(false)} className="SearchButton" >Back</Stylbutton></div> : console.log('searching')}
                 {searchbutton ? 
                     
                     
                     <div style={{display: `flex`, flexDirection: `row`, justifyContent: `space-around`, flexWrap:`wrap`}}>
                         {results.map((item, index) => { 
                             return (
-                                <div key={index} style={{width: `300px`}}>
-                                    {element}
-                                    <div>
+                                <Container2Card key={index} >
+                                    
+                                    <Home2Card>
                                         
-                                        
+                                        {element}
                                         <h2 style={{width: `150`, fontSize: '1rem'}}>{item.title}</h2>
                                         <h3>{item.author}</h3>
                                         <h4>{item.price}</h4>
                                         <img style={{width: `175px`}}src={item.img} alt={item.title}></img>
-                                    </div>
-                                </div>
+                                        
+                                    </Home2Card>
+                                </Container2Card>
                             )
                         })}
                     </div> 
@@ -100,28 +174,28 @@ function Home() {
                         {BookData.map((item, index) => { 
                             if(index <7 ){
                                 return (
-                                    <div key={index} style={{width: `200px` ,display:`flex`, flexDirection: `column`, justifyContent: `space-around`}}>
+                                    <Container1Card key={index}>
                                         {element}
-                                        <div style={{height:`600px`}}>
-                                            <img style={{width: `100px` , objectFit: `contain`, objectPosition: `bottom`, marginBottom: `30px`, paddingBottom: `50px`}}src={item.img}></img>
+                                        <Home1Card>
+                                            <Home1img src={item.img}></Home1img>
                                             <h2 style={{height: `100px`,fontSize: '1rem'}}>{item.title}</h2>
                                             <h3>{item.author}</h3>
                                             <h4 style={{paddingBottom: `50px`}}>{item.price}</h4>
                                             
                                             
-                                        </div>
+                                        </Home1Card>
                                         
-                                    </div>
+                                    </Container1Card>
                                     
                                 )
                             }
                         })}
-                        <div style={{display: `flex`, justifyContent: `space-around`,width: `100%`, textAlign: `center`,marginBottom:`50px`}}>
+                        <Icondiv>
                             <div> {element2} </div>
                             <div> {element3} </div>
                             <div> {element4} </div>
-                        </div>
-                        <div style={{marginTop: `50px`,marginBottom:`50px`, backgroundColor: `#4DB2AD`, width: `100%`, height: `20px`}}></div>
+                        </Icondiv>
+                        <BottomLine></BottomLine>
                         <div style={{width: `100%`, textAlign: `center`,marginBottom:`50px`}}> @copyright </div>
                     </div>    
                 }
