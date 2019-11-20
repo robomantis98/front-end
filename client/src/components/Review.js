@@ -1,26 +1,30 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux'; 
+import {Button} from 'reactstrap';
+import {connect} from 'react-redux';
+import styled from 'styled-components';
+import {submitReview} from '../actions';
+import ReactStars from 'react-stars';
 
-
+const ReviewContainer = styled.div`
+border:2px solid red;
+display:flex;
+flex-direction:column;
+`;
 
 const Review = props => {
 
   const [newPost, setNewPost] = useState({
-		name: "",
-		email: "",
-    book: "",
+		rating: "",
     review: ""
   })
   
   const submitForm = event => {
     event.preventDefault();
 
-    const newPostReview = {
-      ...newPost
-    };
+    props.submitReview({books_id:props.currentBook, rating:props.rating, review:props.review});
 
-    props.addNewPost(newPostReview);
-    setNewPost({ name: "", email: "", book: "", review: ""});
+
+    setNewPost({ rating: "", review: ""});
   };
 
   const changeHandler = event => {
@@ -28,52 +32,44 @@ const Review = props => {
     setNewPost({ ...newPost, [event.target.name]: event.target.value });
   };
 
+  const ratingChanged = (newRating) => {
+    console.log(newRating)
+  }
+
     return (
-      <div className="form-container">
-			<h1>Book Reviews</h1>
+      <ReviewContainer>
 			<form onSubmit={submitForm}>
-				<label htmlFor="name">Name</label>
+				<label htmlFor="rating"/>
+        <ReactStars
+        name="rating"
+        value={newPost.rating}
+        count={5}
+        onChange={ratingChanged}
+        size={24}
+        color2={'#ffd700'}
+        half={false}
+        required
+        />
+        
+        <label htmlFor="review">Review</label>
 				<input 
-					type="text" 
-					name="name" 
-					placeholder="Full Name"
-					value={newPost.name}
-          onChange={changeHandler}
-          required
-					/>
-				<label htmlFor="email">Email</label>
-				<input 
-					type="text"
-					name="email"
-					placeholder="example@gmail.com"
-					value={newPost.email}
-					onChange={changeHandler}
-					required
-				/>
-				<label htmlFor="role">Book</label>
-				<input 
-					type="text"
-					name="role"
-					placeholder="Book Name"
-					value={newPost.book}
-          onChange={changeHandler}
-          required
-				/>
-        <label htmlFor="role">Review</label>
-				<input 
-					type="text"
+					type="textbox"
 					name="review"
 					placeholder="Review"
 					value={newPost.review}
           onChange={changeHandler}
           required
 				/>
-				<button type="submit">Submit</button>
+
+				<Button type="submit" color="primary" onClick={submitForm} >Submit</Button>{' '}
+        <Button color="secondary" >Cancel</Button>
 			</form>
-		</div>
+      </ReviewContainer>
     );
 }
 const mapStateToProps = state => {
-    return {};
+    return {
+      currentBook: state.currentBook
+    };
 }
-export default connect(mapStateToProps,{/*actions*/})(Review);
+export default connect(mapStateToProps,{submitReview})(Review);
