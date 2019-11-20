@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 const BookPage = props => {
     return (
         <div>
-            
+            Hello
         </div>
     );
 }

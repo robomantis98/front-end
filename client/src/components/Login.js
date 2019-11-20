@@ -1,89 +1,63 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {loginRequest} from '../actions'
-
-
-
+import {loginRequest, registerRequest} from '../actions'
+import {Redirect} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { faCheckSquare, faBookOpen } from '@fortawesome/free-solid-svg-icons'
-import styled from 'styled-components'; 
+import { /*faCheckSquare,*/ faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
 const element = <FontAwesomeIcon size="3x" icon={faBookOpen} />
-const element1 = <FontAwesomeIcon size="3x" icon={faCheckSquare} />
+// const element1 = <FontAwesomeIcon size="3x" icon={faCheckSquare} />
 
-const Center = styled.div`
-    display: flex; 
-    justify-content: center;
-    
 
+// const ElementIcon = Login.div`
+//     position: relative;
+//     top: 300px;
+//     left: -300px;
+//     marginLeft: -200px;
+//     margin-top: -50px;
+//     margin-bottom: -50px;
+// `
+const ElementIcon1 = styled.div`
+    display:inline;
+    margin-left: 10px;
+    font-size: 10px;
+    color: #9f7e69;
 `
-const Column = styled.div`
-    margin-top: 50px;
+
+const LoginForm = styled.form`
+    width: 95%;
+    max-width: 700px;
+    margin: 0 auto;
+    background: #d2bba0;
+    border: 3px solid #9f7e69;
+    border-radius: 8px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     justify-content: space-around;
-    width: 600px;
-    height: 600px;
-    box-shadow: 5px 5px 5px 5px grey;
-    margin-bottom: 150px; 
-    background-color: #ffeee2;
-`
-const Column2 = styled.div`
+    align-items: center;
+    margin-bottom: 100px;
     margin-top: 50px;
-    position: relative;
-    left: -610px;
-    width: 600px;
-    height: 500px;
-    box-shadow: 5px 5px 5px 5px grey;
-    margin-bottom: 150px; 
+    h2 {
+        color: #9f7e69;
+    }
 `
-
 const InputForm= styled.input`
-
-    
     background-color: #d2bba0;
     border: 2px solid #9f7e69;
-    margin-left: 10px; 
+    padding-left: 10px; 
     width: 300px;
     height: 50px;
-    margin-bottom: 150px;
+    margin-bottom: 10px;
     font-size: 1.5rem; 
     color: grey; 
 `
-const ElementIcon = styled.div`
-    position: relative;
-    top: 300px;
-    left: -300px;
-    marginLeft: -200px;
-    margin-top: -50px;
-    margin-bottom: -50px;
-`
-const ElementIcon1 = styled.div`
-    position: relative;
-    top: 150px;
-    left: -300px;
-    marginLeft: -200px;
-    margin-top: -50px;
-    margin-bottom: -50px;
-`
-
-const StyledForm = styled.form`
-        display: flex; 
-        flex-direction: column; 
-        align-items: center;
-        justify-content: space-around;
-        margin-bottom: 100px;
-        margin-top: 100px;
-`
-
-const StylButton = styled.button`
-    position: relative;
-    top: -100px;
-    left: 10px;
+const Styledbutton = styled.button`
     width: 100px;
-    height: 70px;
+    height: 60px;
+    margin: 10px;
     border-radius: .7rem;
     border: none 
-    background-color: #d2bba0;
+    background-color: #eee;
     font-size: 1.3rem;
     border: 2px solid #9f7e69;
     :active{
@@ -93,63 +67,52 @@ const StylButton = styled.button`
 
 `
 
-function Login(props){
+const Login = props => {
     
-      const [formData, setFormData] = useState(
-        {
-        username: "", 
-        password: "",
-        } 
+    const [formData, setFormData] = useState(
+        {username: "",password: ""} 
     )
-    const handleSubmit  = (event) => { 
+    const handleLogin  = (event) => { 
         console.log('Logging In');
         event.preventDefault(); 
         props.loginRequest(formData);
     }
 
-
-    
+    const handleRegister  = (event) => { 
+        console.log('Registering');
+        event.preventDefault(); 
+        props.registerRequest(formData);
+    }
 
     const handleForm = (e) => {
-
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    
-
-
-
     return (
-        <Center>
-            <Column>
-                <h2 style={{marginTop:`150px` ,color: `#9f7e69`}}>Login</h2>
-                <ElementIcon1 style={{color: `#9f7e69`}}>{element}</ElementIcon1>
-                
-                {/* onSumbit={submitLogin} */}
-                <StyledForm onSubmit = {handleSubmit}>  
-                   
-                    <InputForm
-                    
-                    name="username"
-              
-                    type="text"
-                    placeholder= "Username"
-                    onChange = {handleForm}
-                    />
-                    
-               
-                    <InputForm
-                    
-                    name="password"
-                    type="password"
-                
-                    placeholder= "Password"
-                    onChange={handleForm}
-                    />
-                    <StylButton  type="submit">Submit</StylButton>
-                </StyledForm>
-            </Column>
-        </Center>
+        <LoginForm> 
+            <h2>Login<ElementIcon1>{element}</ElementIcon1></h2>
+            
+            
+            <InputForm
+                name="username"
+                type="text"
+                placeholder= "Username"
+                onChange = {handleForm}
+            />
+            
+            <InputForm
+                name="password"
+                type="password"
+                placeholder= "Password"
+                onChange={handleForm}
+            />
+            <div className='wrapper'>
+                <Styledbutton disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</Styledbutton>
+                <Styledbutton disabled={props.isAuthenticating} onClick={handleRegister}>Sign-Up</Styledbutton>
+            </div>
+            {props.token?<Redirect to='/home'/>:null}
+
+        </LoginForm>
     )
 }
 const mapStateToProps = state => {
@@ -159,4 +122,4 @@ const mapStateToProps = state => {
         isAuthenticating: state.isAuthenticating
     };
 }
-export default connect(mapStateToProps,{loginRequest})(Login);
+export default connect(mapStateToProps,{loginRequest, registerRequest})(Login);

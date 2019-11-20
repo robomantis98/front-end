@@ -46,9 +46,9 @@ export const loadBooks = () => dispatch => {
 }
 
 export const deleteBook = id => dispatch => {
-    dispatch({type:DELETE_BOOK_FAILURE,payload:id});
-    axiosWithAuth().delete('/api/books/:id')
-        .then(res=>dispatch({type:DELETE_BOOK_SUCCESS,payload:res}))
+    dispatch({type:DELETE_BOOK_REQUEST,payload:id});
+    axiosWithAuth().delete(`/api/books/${id}`)
+        .then(res=>dispatch({type:DELETE_BOOK_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:DELETE_BOOK_FAILURE,payload:err}));
 }
 // REVIEW PAGE ACTIONS
@@ -58,7 +58,7 @@ export const SUBMIT_REVIEW_FAILURE = 'SUBMIT_REVIEW_FAILURE';
 
 export const submitReview = formData => dispatch => {
     dispatch({type:SUBMIT_REVIEW_REQUEST,payload:formData})
-    axiosWithAuth().post('/api/reviews/:id')
+    axiosWithAuth().post(`/api/reviews/${formData.id}`)
         .then(res=>dispatch({type:SUBMIT_REVIEW_SUCCESS,payload:res}))
         .catch(err=>dispatch({type:SUBMIT_REVIEW_FAILURE,payload:err}))
 }
