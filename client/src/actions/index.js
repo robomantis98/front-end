@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
+//TOKEN HANDLERS
+export const SET_TOKEN = 'SET_TOKEN';
+
+export const setToken = value => ({type:SET_TOKEN,payload:value});
 // LOGIN PAGE ACTIONS
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

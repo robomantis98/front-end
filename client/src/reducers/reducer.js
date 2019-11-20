@@ -1,4 +1,5 @@
 import {
+    SET_TOKEN,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
@@ -34,25 +35,21 @@ const initState = {
 }
 const reducer = (state=initState,action) => {
     switch(action.type){
+        case SET_TOKEN:
+            return {...state, token:action.payload}
         case LOGIN_REQUEST:
         case REGISTER_REQUEST:
             return { ...state, isAuthenticating: true, error: null};
         case LOGIN_SUCCESS: 
         case REGISTER_SUCCESS:
             localStorage.setItem('token',action.payload.data.token);
-            return { ...state, isAuthenticating: false, error: null, token: action.payload.data.token, username: action.payload.data.username};
+            return { ...state, token:true, isAuthenticating: false, error: null};
         case LOGIN_FAILURE: 
         case REGISTER_FAILURE:
             return { ...state, isAuthenticating: false, error: action.payload}
-        // case REGISTER_REQUEST:
-        //     return { ...state, isAuthenticating: true, error: null};
-        // case REGISTER_SUCCESS: 
-        //     return { ...state, isAuthenticating: false, error: null, token: action.payload.token, username: action.payload.username};
-        // case REGISTER_FAILURE: 
-        //     return { ...state, isAuthenticating: false, error: action.payload}
         case LOGOUT: 
             localStorage.removeItem('token');
-            return { ...state, token: null, username: null, currentBook: null}
+            return { ...state, token: false, username: null, currentBook: null}
         case LEAVE_BOOK: 
             return { ...state, currentBook: null}
         case FOCUS_BOOK:
