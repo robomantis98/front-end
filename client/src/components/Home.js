@@ -152,6 +152,7 @@ const mapStateToProps = state => {
         isLoading:state.isLoading,
         needUpdate:state.needUpdate,
         error: state.error
+
     }
 }
 export default connect(mapStateToProps,{loadBooks})(Home);
