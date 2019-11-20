@@ -62,17 +62,7 @@ const BookPage = props => {
           <Review/>
                   
           <ModalFooter>
-            {useEffect(()=> {
-              axios
-              .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${id}`)
-              .then(res =>{
-                setReviews(res.reviews)
-                console.log(res.reviews)
-              })
-              .catch(error =>{
-                console.log('Data not fetched', error)
-              })
-            }),[]}
+           
           </ModalFooter>
             
         </Modal>
