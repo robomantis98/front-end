@@ -51,6 +51,7 @@ const reducer = (state=initState,action) => {
         // case REGISTER_FAILURE: 
         //     return { ...state, isAuthenticating: false, error: action.payload}
         case LOGOUT: 
+            localStorage.removeItem('token');
             return { ...state, token: null, username: null, currentBook: null}
         case LEAVE_BOOK: 
             return { ...state, currentBook: null}
@@ -59,17 +60,14 @@ const reducer = (state=initState,action) => {
         case LOAD_BOOKS_REQUEST:
             return {...state, needUpdate: false, isLoading: true, error: null}
         case LOAD_BOOKS_SUCCESS:
-            console.log(action.payload.data) 
             return {...state, isLoading: false, error: null, books:action.payload.data}
         case LOAD_BOOKS_FAILURE:
             return {...state, isLoading: false, error: action.payload}
         case DELETE_BOOK_REQUEST: 
             return { ...state, isDeleting: true, error: null }
         case DELETE_BOOK_SUCCESS:
-            console.log(action.payload) 
             return { ...state, needUpdate: true, isDeleting: false, error: null}
         case DELETE_BOOK_FAILURE: 
-            console.log(action.payload)
             return { ...state, isDeleting: false, error: action.payload}
         case SUBMIT_REVIEW_REQUEST:
             return { ...state, isReviewing: true, error: null}

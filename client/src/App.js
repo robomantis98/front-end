@@ -1,13 +1,13 @@
 import React from 'react';
 import {Route, Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PrivateRoute  from './utils/privateRoute';
 import './App.css';
-import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import BookPage from './components/BookPage';
-import Review from './components/Review';
 import styled from 'styled-components'; 
-
+import {logout} from './actions';
 const NavBookr = styled.div`
      width: 100%; 
      height: 100px; 
@@ -22,34 +22,28 @@ const NavBookr = styled.div`
 
 `
 
-function App() {
-
-
-    
-
-
+function App(props) {
   return (
     <div className="App">
       <NavBookr>
-        
-        <Link className = "BookrLinks" to = "/home"> Home </Link>
-        <Link className = "BookrLinks" to="/login">Login</Link>{/**This needs to be log out if logged in*/}
-        <Link className = "BookrLinks" to="/review">Reviews</Link>{/**This won't make sense with our flow */}
+        <Link className = "BookrLinks" to ="/home"> Home </Link>
+        <Link 
+          className = "BookrLinks" 
+          to="/login" 
+          onClick={props.token?props.logout:null}>
+            {props.token?'Log Out':'Log In'}
+        </Link>
       </NavBookr>
-     
-      <Route path='/home' component={Home}/>
-      <Route path='/login' component={Login} />
-      <Route path='/login' component={Register} />
-      <Route 
-        path='/books/:id'
-        render={props => <BookPage {...props}/>}
-      />{/**Route convert to PrivateRoute */}
-      <Route 
-        path='/review/:id'
-        render={props=><Review {...props}/>}
-      />{/**Route convert to PrivateRoute */}
+      
+      <Route path='/login' component={Login}/>
+      <PrivateRoute path='/home' component={Home}/>
+      <PrivateRoute path='/books/:id' component={BookPage}/>
     </div>
   );
 }
-
-export default App;
+const mapStateToProps = state => {
+  return {
+    token:state.token
+  }
+}
+export default connect(mapStateToProps,{logout})(App);
