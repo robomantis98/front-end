@@ -5,16 +5,16 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 export const SET_TOKEN = 'SET_TOKEN';
 
 export const setToken = value => ({type:SET_TOKEN,payload:value});
-// LOGIN PAGE ACTIONS
+// LOGIN ACTIONS
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+export const LOGOUT = 'LOGOUT';
 
 export const loginRequest = userData =>  dispatch => {
-    
     dispatch({type:LOGIN_REQUEST,payload:userData});
     axios.post('https://bookr-bw-app.herokuapp.com/api/users/login',userData)
         .then(res=>dispatch({type:LOGIN_SUCCESS,payload:res}))
@@ -26,15 +26,11 @@ export const registerRequest = userData => dispatch => {
         .then(res=>dispatch({type:REGISTER_SUCCESS,payload:res}))
         .catch(err=>dispatch({type:REGISTER_FAILURE,payload:err}));
 }
-// MULTI PAGE ACTIONS
-export const LOGOUT = 'LOGOUT';
-export const LEAVE_BOOK = 'LEAVE_BOOK';
-export const FOCUS_BOOK = 'FOCUS_BOOK';
-
 export const logout = () => ({type:LOGOUT});
-export const leaveBook = () => ({type:LEAVE_BOOK});
-export const focusBook = () => ({type:LEAVE_BOOK});
 // HOME PAGE ACTIONS
+export const LOAD_BOOK_REQUEST = 'LOAD_BOOK_REQUEST';
+export const LOAD_BOOK_SUCCESS = 'LOAD_BOOK_SUCCESS';
+export const LOAD_BOOK_FAILURE = 'LOAD_BOOK_FAILURE';
 export const LOAD_BOOKS_REQUEST = 'LOAD_BOOKS_REQUEST';
 export const LOAD_BOOKS_SUCCESS = 'LOAD_BOOKS_SUCCESS';
 export const LOAD_BOOKS_FAILURE = 'LOAD_BOOKS_FAILURE';
@@ -42,6 +38,12 @@ export const DELETE_BOOK_REQUEST = 'DELETE_BOOK_REQUEST';
 export const DELETE_BOOK_SUCCESS = 'DELETE_BOOK_SUCCESS';
 export const DELETE_BOOK_FAILURE = 'DELETE_BOOK_FAILURE';
 
+export const loadBook = id => dispatch => {
+    dispatch({type:LOAD_BOOK_REQUEST,payload:id});
+    axiosWithAuth().get(`/api/books/${id}`)
+        .then(res=>dispatch({type:LOAD_BOOK_SUCCESS,payload:res.data}))
+        .catch(err=>dispatch({type:LOAD_BOOK_FAILURE,payload:err}))
+}
 export const loadBooks = () => dispatch => {
     dispatch({type:LOAD_BOOKS_REQUEST});
     axiosWithAuth().get('/api/books/')

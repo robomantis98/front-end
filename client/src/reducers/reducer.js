@@ -7,8 +7,9 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAILURE,
     LOGOUT,
-    LEAVE_BOOK,
-    FOCUS_BOOK,
+    LOAD_BOOK_REQUEST,
+    LOAD_BOOK_SUCCESS,
+    LOAD_BOOK_FAILURE,
     LOAD_BOOKS_REQUEST,
     LOAD_BOOKS_SUCCESS,
     LOAD_BOOKS_FAILURE,
@@ -50,10 +51,12 @@ const reducer = (state=initState,action) => {
         case LOGOUT: 
             localStorage.removeItem('token');
             return { ...state, token: false, username: null, currentBook: null}
-        case LEAVE_BOOK: 
-            return { ...state, currentBook: null}
-        case FOCUS_BOOK:
-            return { ...state, currentBook: action.payload}
+        case LOAD_BOOK_REQUEST:
+            return {...state, needUpdate: false, isLoading: true, error: null}
+        case LOAD_BOOK_SUCCESS:
+            return {...state, isLoading: false, error: null, currentBook:action.payload}
+        case LOAD_BOOK_FAILURE:
+            return {...state, isLoading: false, error: action.payload}
         case LOAD_BOOKS_REQUEST:
             return {...state, needUpdate: false, isLoading: true, error: null}
         case LOAD_BOOKS_SUCCESS:
