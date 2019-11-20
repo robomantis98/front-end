@@ -140,7 +140,7 @@ function Home(props) {
                 <h1 className="display-3" style={{color:`#f7ffe0`}}>Bookr</h1>
                 <p className="lead" style={{color:`#f7ffe0`}}>Take up a book with Bookr, we are sure you'll enjoy the read.</p>
                 <hr className="my-2" />
-                <p style={{color:`#f7ffe0`}}>Did you know there are about 129,864,880 books in the entire world!? Rent or Lend Books with Bookr</p>
+                <p style={{color:`#f7ffe0`}}>Did you know there are about 129,864,880 books in the entire world!? Review Books</p>
                 <p className="lead">
                 <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}>Learn More</Button>
                 </p>
