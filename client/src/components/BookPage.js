@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 import Review from './Review';
-import {deleteBook, focusBook} from '../actions';
+import {deleteBook, loadBook} from '../actions';
 import Book from './Book';
 
 const BookPage = props => {
@@ -29,12 +29,11 @@ const BookPage = props => {
     props.deleteBook(props.book.id);
 }
 
-useEffect(() =>{
-  if (!isLoading && (!book  || book.id!=id)){
-    loadBook(id);
-  }
-  console.log("useEffect");
-},[book])
+  useEffect(() =>{
+    if (!isLoading && (!book  || book.id!=id)){
+      loadBook(id);
+    }
+  },[book])
 
   return (
 

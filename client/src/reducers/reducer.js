@@ -54,7 +54,7 @@ const reducer = (state=initState,action) => {
         case LOAD_BOOK_REQUEST:
             return {...state, needUpdate: false, isLoading: true, error: null}
         case LOAD_BOOK_SUCCESS:
-            return {...state, isLoading: false, error: null, currentBook:action.payload.data}
+            return {...state, isLoading: false, error: null, currentBook:action.payload}
         case LOAD_BOOK_FAILURE:
             return {...state, isLoading: false, error: action.payload}
         case LOAD_BOOKS_REQUEST:
