@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {deleteBook} from '../actions';
+import ReactStars from 'react-stars'
 const BookCard = styled.div`
     width: 95%;
     max-width:500px;
@@ -33,11 +34,14 @@ const BookCard = styled.div`
         color: black;
     }
 `
-
+const ratingChanged = (newRating) => {
+    console.log(newRating)
+  }
 const Book = props => {
     const removeBook = event => {
         props.deleteBook(props.book.id);
     }
+
     return (
         
             <BookCard>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Route, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PrivateRoute  from './utils/privateRoute';
@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import BookPage from './components/BookPage';
 import styled from 'styled-components'; 
-import {logout} from './actions';
+import {setToken,logout} from './actions';
 const NavBookr = styled.div`
      width: 100%; 
      height: 100px; 
@@ -22,10 +22,13 @@ const NavBookr = styled.div`
 
 `
 
-function App(props) {
+const App = props => {
+  const {setToken} = props
+  useEffect(()=>{
+    localStorage.getItem('token') ? setToken(true) : setToken(false)
+  },[setToken])
   return (
     <div className="App">
-      
       <NavBookr>
         <Link className = "BookrLinks" to ="/home"> Home </Link>
         <Link 
@@ -47,4 +50,4 @@ const mapStateToProps = state => {
     token:state.token
   }
 }
-export default connect(mapStateToProps,{logout})(App);
+export default connect(mapStateToProps,{setToken,logout})(App);
