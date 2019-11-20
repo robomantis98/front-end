@@ -29,7 +29,6 @@ const App = props => {
   },[setToken])
   return (
     <div className="App">
-      
       <NavBookr>
         <Link className = "BookrLinks" to ="/home"> Home </Link>
         <Link 

@@ -1,6 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux'; 
+import ReactStars from 'react-stars'
+
+
+
 const BookPage = props => {
+    
+   
+
+
+        const ratingChanged = (newRating) => {
+            console.log(newRating)
+          }
     return (
         <div>
             Hello
