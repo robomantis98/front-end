@@ -110,7 +110,7 @@ const Login = props => {
                 <Styledbutton disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</Styledbutton>
                 <Styledbutton disabled={props.isAuthenticating} onClick={handleRegister}>Sign-Up</Styledbutton>
             </div>
-            {localStorage.getItem('token')? <Redirect to='/home'/>:null}
+            {props.token? <Redirect to='/home'/>:null}
 
         </LoginForm>
     )

@@ -34,8 +34,8 @@ const App = props => {
         <Link 
           className = "BookrLinks" 
           to="/login" 
-          onClick={localStorage.getItem('token')?props.logout:null}>
-            {localStorage.getItem('token')?'Log Out':'Log In'}
+          onClick={props.token?props.logout:null}>
+            {props.token?'Log Out':'Log In'}
         </Link>
       </NavBookr>
       
