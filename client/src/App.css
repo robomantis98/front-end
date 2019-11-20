@@ -22,7 +22,6 @@
 }
 
 .BookrLinks{
-
   text-decoration: none;
   color: #d2bba0;
 }
@@ -35,7 +34,7 @@
     margin-bottom: 150px;
 }
 input:focus, textarea:focus{
-  outline:none;
+  outline: none;
 }
 button:focus {
 

@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
-// import BookData from '../BookData';
+import BookData from '../BookData';
 import {connect} from 'react-redux'; 
-// import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-// import { faBookReader} from '@fortawesome/free-solid-svg-icons'
+import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
+import { faBookReader} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
 import {loadBooks} from '../actions';
 import Book from './Book';
+import { Jumbotron, Button } from 'reactstrap';
+import bookrImg from './BookrJumbotron.jpg'
 
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
-// const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
-// const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
-// const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
+const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
+const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
+const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
 
 
 // const Home2Card = styled.div`
@@ -25,6 +27,7 @@ import Book from './Book';
 // const Home1Card = styled.div`
 //      height: 500px;
 //      box-shadow: 2px 2px 5px 2px grey;
+//      width: 250px;
 
 
 // `
@@ -80,14 +83,14 @@ import Book from './Book';
     
 
 // `
-// const Icondiv = styled.div`
-//     margin-top: 40px;
-//     display: flex
-//     justify-content: space-around
-//     width:100%
-//     textAlign: center
-//     marginBottom:50px
-// `
+const Icondiv = styled.div`
+    margin-top: 40px;
+    display: flex
+    justify-content: space-around
+    width:100%
+    
+    margin-bottom:150px
+`
 
 // const BottomLine = styled.div`
 //     margin-top: 50px
@@ -133,16 +136,26 @@ function Home(props) {
     
     return (
         <Homediv className='Home'>
+            <Jumbotron style={{backgroundImage: `url(${bookrImg})`}}>
+                <h1 className="display-3" style={{color:`#f7ffe0`}}>Bookr</h1>
+                <p className="lead" style={{color:`#f7ffe0`}}>Take up a book with Bookr, we are sure you'll enjoy the read.</p>
+                <hr className="my-2" />
+                <p style={{color:`#f7ffe0`}}>Did you know there are about 129,864,880 books in the entire world!? Review Books</p>
+                <p className="lead">
+                <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}>Learn More</Button>
+                </p>
+            </Jumbotron>
             <SearchBar type='text' placeholder='Search...' onChange={handleChange}/>
             <div className='book-list'>
+            {/* {BookData.length !== 0 ?
+                        BookData. */}
                 {books.length !== 0 ? 
-                    books
-                        .filter(book => search !== '' ? book.title.toLowerCase().includes(search.toLowerCase()) : true )
+                    books.filter(book => search !== '' ? book.title.toLowerCase().includes(search.toLowerCase()) : true )
                         .map((item,i)=><Book key={i} book={item}/>)
                     : <h2>Loading...</h2>
                 }
             </div>
-            
+            <Icondiv>{element2}{element3}{element4}</Icondiv>
         </Homediv>
     )
 }
