@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {loadBooks} from '../actions';
 import Book from './Book';
+import { Jumbotron, Button } from 'reactstrap';
+import bookrImg from './BookrJumbotron.jpg'
 
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 // const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
@@ -134,6 +136,15 @@ function Home(props) {
     
     return (
         <Homediv className='Home'>
+            <Jumbotron style={{backgroundImage: `url(${bookrImg})`}}>
+                <h1 className="display-3" style={{color:`#f7ffe0`}}>Bookr</h1>
+                <p className="lead" style={{color:`#f7ffe0`}}>Take up a book with Bookr, we are sure you'll enjoy the read.</p>
+                <hr className="my-2" />
+                <p style={{color:`#f7ffe0`}}>Did you know there are about 129,864,880 books in the entire world!? Rent or Lend Books with Bookr</p>
+                <p className="lead">
+                <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}>Learn More</Button>
+                </p>
+            </Jumbotron>
             <SearchBar type='text' placeholder='Search...' onChange={handleChange}/>
             <div className='book-list'>
                 {books.length !== 0 ? 

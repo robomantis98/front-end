@@ -30,14 +30,13 @@ function App() {
 
   return (
     <div className="App">
-      
       <NavBookr>
         
         <Link className = "BookrLinks" to = "/home"> Home </Link>
         <Link className = "BookrLinks" to="/login">Login</Link>{/**This needs to be log out if logged in*/}
         <Link className = "BookrLinks" to="/review">Reviews</Link>{/**This won't make sense with our flow */}
       </NavBookr>
-    
+     
       <Route path='/home' component={Home}/>
       <Route path='/login' component={Login} />
       <Route path='/login' component={Register} />
