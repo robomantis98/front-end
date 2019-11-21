@@ -23,7 +23,6 @@ const Review = props => {
 
     props.submitReview({books_id:props.currentBook, rating:props.rating, review:props.review});
 
-
     setNewPost({ rating: "", review: ""});
   };
 
@@ -39,6 +38,7 @@ const Review = props => {
     return (
       <ReviewContainer>
 			<form onSubmit={submitForm}>
+
 				<label htmlFor="rating"/>
         <ReactStars
         name="rating"
@@ -62,7 +62,6 @@ const Review = props => {
 				/>
 
 				<Button type="submit" color="primary" onClick={submitForm} >Submit</Button>{' '}
-        <Button color="secondary" >Cancel</Button>
 			</form>
       </ReviewContainer>
     );

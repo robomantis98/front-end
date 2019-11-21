@@ -5,6 +5,23 @@ import axios from 'axios';
 import Review from './Review';
 import {deleteBook, loadBook} from '../actions';
 import Book from './Book';
+import styled from 'styled-components';
+
+
+const ContainerCardDiv = styled.div`
+border-bottom:2px solid grey;
+margin:50px 50px;
+padding: 50px;
+display:flex;
+justify-content: flex-start;
+align-items:center;
+`;
+
+const TextDiv = styled.div`
+display:flex;
+justify-content: center;
+flex-direction:column;
+`;
 
 const BookPage = props => {
   
@@ -27,7 +44,7 @@ const BookPage = props => {
 
   const removeBook = event => {
     props.deleteBook(props.book.id);
-}
+  }
 
   useEffect(() =>{
     if (!isLoading && (!book  || book.id!=id)){
@@ -40,21 +57,20 @@ const BookPage = props => {
     <>
 
       {book? 
-      <div>
-        <div className='deleteButton' onClick={removeBook}><b>Delete</b></div>
-        <div className='card-head'>
-          <h2>{book.title}</h2>
-        </div>
-        <div className='card-body'>
-            <h3>{book.author}</h3>
-            <p>{book.description}</p>
-        </div> 
-      </div>: console.log(book)}
-                
+      <ContainerCardDiv
+      key={book.id}>
+      <img src={book.image_url} alt="Book cover image"/>
+      <TextDiv>
+      <h3>{book.title}</h3><br/>
+      <h5>{book.author}</h5><br/>
+      <h5>{book.description}</h5><br/>
+      </TextDiv>
+      </ContainerCardDiv>: console.log(book)}
 
 
+
       <div>
-        <Button color="danger" onClick={toggle}>Add Review</Button>
+        <Button onClick={toggle}>Add Review</Button>
         <Modal isOpen={modal} toggle={toggle} className={className}>
               
           <ModalHeader toggle={toggle}>What did you think of this book?</ModalHeader>
@@ -62,17 +78,7 @@ const BookPage = props => {
           <Review/>
                   
           <ModalFooter>
-            {useEffect(()=> {
-              axios
-              .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${id}`)
-              .then(res =>{
-                setReviews(res.reviews)
-                console.log(res.reviews)
-              })
-              .catch(error =>{
-                console.log('Data not fetched', error)
-              })
-            }),[]}
+
           </ModalFooter>
             
         </Modal>
@@ -81,6 +87,7 @@ const BookPage = props => {
     </>
   );
 }
+
 const mapStateToProps = state => {
   return {
     book: state.currentBook,
