@@ -35,7 +35,7 @@ const BookCard = styled.div`
         color: black;
     }
 
-    div img {
+    img {
         max-width: 95%;
     }
 `       
