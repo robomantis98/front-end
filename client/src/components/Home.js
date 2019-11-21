@@ -1,89 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import BookData from '../BookData';
+import {a} from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { faBookReader} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
 import {loadBooks} from '../actions';
 import Book from './Book';
 import { Jumbotron, Button } from 'reactstrap';
-import bookrImg from './BookrJumbotron.jpg'
-
+import bookrImg from './BookrJumbotron.jpg';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
 const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
 
-
-// const Home2Card = styled.div`
-     
-//     width: 300px; 
-//     height: 500px; 
-//     box-shadow: 2px 5px 5px 2px grey; 
-
-
-// `
-// const Home1Card = styled.div`
-//      height: 500px;
-//      box-shadow: 2px 2px 5px 2px grey;
-//      width: 250px;
-
-
-// `
-// const Container1Card = styled.div`
-//     margin-top: 50px; 
-//     width: 200px;
-//     display:flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justifyContent: space-around;
-
-
-// `
-// const Container2Card = styled.div`
-//     margin-top: 50px; 
-//     width: 300px
-
-
-// `
-
-
-
-
-// const Home1img = styled.img`
-//     margin-top: 20px;
-//     width: 100px 
-//     objectFit: contain
-//     objectPosition: bottom 
-//     marginBottom: 30px        
-//     paddingBottom: 50px
-
-// `
-
-// const Stylbutton = styled.button`
-//     margin-top: 30px; 
-//     border: 1px solid grey; 
-//     border-radius: .5rem;
-//     width: 130px; 
-//     height: 50px; 
-//     background-color: #ffeee2;
-//     font-size: 1.7rem;
-
-// `
-// const Stylinput = styled.input`
-//     margin-top: 30px; 
-//     border: none; 
-//     border-radius: .5rem;
-//     width: 160px; 
-//     height: 50px; 
-//     background-color: #ffeee2;
-//     font-size: 1.7rem;
-//     focus: none;
-    
-
-// `
 const Icondiv = styled.div`
     margin-top: 40px;
     display: flex
@@ -92,14 +22,6 @@ const Icondiv = styled.div`
     
     margin-bottom:150px
 `
-
-// const BottomLine = styled.div`
-//     margin-top: 50px
-//     margin-bottom: 50px 
-//     background-color: #ffeee2
-//     width: 100% 
-//     height: 20px
-// `
 const Homediv = styled.div`
     .book-list{
         width: 100%;
@@ -115,6 +37,10 @@ const Homediv = styled.div`
             align-items: flex-start;
         }
     }
+    div .buttonText{
+      color:white;
+      text-decoration:none;
+    }
     
 `;
 const SearchBar = styled.input`
@@ -124,8 +50,10 @@ const SearchBar = styled.input`
     border-radius:5px;
 `;
 function Home(props) {
+    
     const {books,needUpdate,isLoading,loadBooks} = props;
     const [search, setSearch] = useState("");
+    
     function handleChange(event) {
         setSearch(event.target.value);     
     }
@@ -134,7 +62,6 @@ function Home(props) {
         loadBooks()
     }}, [books,needUpdate,isLoading,loadBooks]);
 
-    
     return (
         <Homediv className='Home'>
             <Jumbotron style={{backgroundImage: `url(${bookrImg})`}}>
@@ -143,20 +70,18 @@ function Home(props) {
                 <hr className="my-2" />
                 <p style={{color:`#f7ffe0`}}>Did you know there are about 129,864,880 books in the entire world!? Review Books</p>
                 <p className="lead">
-                <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}>Learn More</Button>
+                <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}><a className="buttonText" href="https://cranky-leakey-7e00c6.netlify.com/">About Us</a></Button>
                 </p>
             </Jumbotron>
             <SearchBar type='text' placeholder='Search...' onChange={handleChange}/>
             <div className='book-list'>
-            {/* {BookData.length !== 0 ?
-                        BookData. */}
-                {books.length !== 0 ? 
+                { books.length !== 0 ? 
                     books.filter(book => search !== '' ? book.title.toLowerCase().includes(search.toLowerCase()) : true )
                         .map((item,i)=><Book key={i} book={item}/>)
                     : <h2>Loading...</h2>
                 }
             </div>
-            <Link to="/displaybooks">Display All Books</Link>
+            <a to="/displaybooks">Display All Books</a>
             <Icondiv>{element2}{element3}{element4}</Icondiv>
         </Homediv>
     )

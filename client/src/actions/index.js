@@ -17,13 +17,13 @@ export const LOGOUT = 'LOGOUT';
 export const loginRequest = userData =>  dispatch => {
     dispatch({type:LOGIN_REQUEST,payload:userData});
     axios.post('https://bookr-bw-app.herokuapp.com/api/users/login',userData)
-        .then(res=>dispatch({type:LOGIN_SUCCESS,payload:res}))
+        .then(res=>dispatch({type:LOGIN_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:LOGIN_FAILURE,payload:err}));
 }
 export const registerRequest = userData => dispatch => {
     dispatch({type:REGISTER_REQUEST,payload:userData});
     axios.post('https://bookr-bw-app.herokuapp.com/api/users/register',userData)
-        .then(res=>dispatch({type:REGISTER_SUCCESS,payload:res}))
+        .then(res=>dispatch({type:REGISTER_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:REGISTER_FAILURE,payload:err}));
 }
 export const logout = () => ({type:LOGOUT});
@@ -47,7 +47,7 @@ export const loadBook = id => dispatch => {
 export const loadBooks = () => dispatch => {
     dispatch({type:LOAD_BOOKS_REQUEST});
     axiosWithAuth().get('/api/books/')
-        .then(res=>dispatch({type:LOAD_BOOKS_SUCCESS,payload:res}))
+        .then(res=>dispatch({type:LOAD_BOOKS_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:LOAD_BOOKS_FAILURE,payload:err}))
 }
 
@@ -58,14 +58,23 @@ export const deleteBook = id => dispatch => {
         .catch(err=>dispatch({type:DELETE_BOOK_FAILURE,payload:err}));
 }
 // REVIEW PAGE ACTIONS
+export const GET_REVIEWS_REQUEST = 'GET_REVIEWS_REQUEST';
+export const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS';
+export const GET_REVIEWS_FAILURE = 'GET_REVIEWS_FAILURE';
 export const SUBMIT_REVIEW_REQUEST = 'SUBMIT_REVIEW_REQUEST';
 export const SUBMIT_REVIEW_SUCCESS = 'SUBMIT_REVIEW_SUCCESS';
 export const SUBMIT_REVIEW_FAILURE = 'SUBMIT_REVIEW_FAILURE';
 
-export const submitReview = formData => dispatch => {
+export const getReviews = id => dispatch => {
+    dispatch({type:GET_REVIEWS_REQUEST})
+    axiosWithAuth().get(`/api/reviews/${id}`)
+        .then(res=>dispatch({type:GET_REVIEWS_SUCCESS,payload:res.data}))
+        .catch(err=>dispatch({type:GET_REVIEWS_FAILURE,payload:err}))
+}
+export const submitReview = (formData, id) => dispatch => {
     dispatch({type:SUBMIT_REVIEW_REQUEST,payload:formData})
-    axiosWithAuth().post(`/api/reviews/${formData.id}`)
-        .then(res=>dispatch({type:SUBMIT_REVIEW_SUCCESS,payload:res}))
+    axiosWithAuth().post(`/api/reviews/${id}`,formData)
+        .then(res=>dispatch({type:SUBMIT_REVIEW_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:SUBMIT_REVIEW_FAILURE,payload:err}))
 }
 
