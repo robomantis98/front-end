@@ -5,7 +5,7 @@
 
 - Airtable : https://airtable.com/shrtA1m4LFJAnjvqS/tblI02wuarVEYWVSv/viw2L09271lKsRt5x/rec28K3TrpH0YQe0q?blocks=hide
 
-- Deployed Site: https://client.hyperdonutloop.now.sh
+- Deployed Site: https://distracted-keller-0482c5.netlify.com/home
 
 ## Color Pallet
 
