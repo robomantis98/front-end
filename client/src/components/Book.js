@@ -34,13 +34,17 @@ const BookCard = styled.div`
         text-decoration: none;
         color: black;
     }
+
+    div img {
+        max-width: 95%;
+    }
 `       
 const ratingChanged = (newRating) => {
     console.log(newRating)
   }
 const Book = props => {
     
-    const removeBook = event => {
+    const removeBook = () => {
         props.deleteBook(props.book.id);
     }
     
