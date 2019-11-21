@@ -4,10 +4,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {deleteBook} from '../actions';
 import ReactStars from 'react-stars';
-<<<<<<< HEAD
-=======
 import { axiosWithAuth } from '../utils/axiosWithAuth';
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 const BookCard = styled.div`
     width: 95%;
     max-width:500px;
@@ -37,14 +34,10 @@ const BookCard = styled.div`
         text-decoration: none;
         color: black;
     }
-<<<<<<< HEAD
-`;
-=======
 `       
 const ratingChanged = (newRating) => {
     console.log(newRating)
   }
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 const Book = props => {
     
     const removeBook = event => {
@@ -60,19 +53,6 @@ const Book = props => {
             setFormula(res.data);
         })    
 
-<<<<<<< HEAD
-    return (       
-        <BookCard>
-            <div className='deleteButton' onClick={removeBook}><b>X</b></div>
-            <div className='card-head'>
-                <Link to={`/books/${props.book.id}`}><h2>{props.book.title}</h2></Link>
-            </div>
-            <div className='card-body'>
-                <h3>{props.book.author}</h3>
-                <p>{props.book.description}</p>
-            </div>
-        </BookCard>
-=======
         .catch((err) => { 
             console.log("couldn't fetch data", err); 
         })
@@ -114,7 +94,6 @@ const Book = props => {
                     />
                 
             </BookCard>
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
     );
 }
 const mapStateToProps = state => {

@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, {useState} from 'react';
-=======
 import React, {useEffect, useState} from 'react';
 import {Button} from 'reactstrap';
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {submitReview} from '../actions';
@@ -78,7 +74,6 @@ const Review = props => {
    
     return (
       <ReviewContainer>
-<<<<<<< HEAD
         <form>
             <ReactStars
               name="rating"
@@ -98,30 +93,6 @@ const Review = props => {
             onChange={changeHandler}
             required
           />
-=======
-			<form onSubmit={submitForm}>
-				<label htmlFor="rating"/>
-        <ReactStars
-        name="rating"
-        value={newPost.rating}
-        count={5}
-        onChange={ratingChanged}
-        size={24}
-        color2={'#ffd700'}
-        half={true}
-        required
-        />
-        
-        <label htmlFor="review">Review</label>
-				<input 
-					type="textbox"
-					name="review"
-					placeholder="Review"
-					value={newPost.review !=0 ? newPost.review : 3}
-          onChange={changeHandler}
-          required
-				/>
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 
           <Button onClick={submitForm} >Submit</Button>{' '}
         </form>

@@ -9,13 +9,9 @@ import {loadBooks} from '../actions';
 import Book from './Book';
 import { Jumbotron, Button } from 'reactstrap';
 import bookrImg from './BookrJumbotron.jpg'
-<<<<<<< HEAD
-
-=======
 import {Route, Link} from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
 const element4 = <FontAwesomeIcon size="3x" icon={faNodeJs} />
@@ -64,14 +60,6 @@ function Home(props) {
         loadBooks()
     }}, [books,needUpdate,isLoading,loadBooks]);
 
-<<<<<<< HEAD
-=======
-    
-
-    
-
-
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
     return (
         <Homediv className='Home'>
             <Jumbotron style={{backgroundImage: `url(${bookrImg})`}}>
@@ -85,12 +73,7 @@ function Home(props) {
             </Jumbotron>
             <SearchBar type='text' placeholder='Search...' onChange={handleChange}/>
             <div className='book-list'>
-<<<<<<< HEAD
                 { books.length !== 0 ? 
-=======
-            
-                {books.length !== 0 ? 
->>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
                     books.filter(book => search !== '' ? book.title.toLowerCase().includes(search.toLowerCase()) : true )
                         .map((item,i)=><Book key={i} book={item}/>)
                     : <h2>Loading...</h2>
