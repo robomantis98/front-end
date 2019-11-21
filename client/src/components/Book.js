@@ -34,6 +34,10 @@ const BookCard = styled.div`
       text-align:center;
       margin: 0 35%;
     }
+
+    img{
+      max-width:95%;
+    }
 `       
 const ratingChanged = (newRating) => {
     console.log(newRating)
