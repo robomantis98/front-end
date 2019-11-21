@@ -2,9 +2,25 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Modal, ModalHeader} from 'reactstrap';
 import Review from './Review';
-import ReviewCard from './ReviewCard';
-import {deleteBook, loadBook, getReviews} from '../actions';
+import {deleteBook, loadBook} from '../actions';
+import Book from './Book';
 import styled from 'styled-components';
+
+
+const ContainerCardDiv = styled.div`
+border-bottom:2px solid grey;
+margin:50px 50px;
+padding: 50px;
+display:flex;
+justify-content: flex-start;
+align-items:center;
+`;
+
+const TextDiv = styled.div`
+display:flex;
+justify-content: center;
+flex-direction:column;
+`;
 
 const Button = styled.div`
     border-radius: 4px;
@@ -52,11 +68,7 @@ const BookPage = props => {
         props.deleteBook(props.book.id);
     }
 
-    useEffect(() => {
-        console.log(isLoading,reviews.length,needUpdate);
-        if (!isLoading && (!book  || book.id !== id)) loadBook(id);
-        if (!isLoading && (reviews.length===0 || needUpdate)) getReviews();
-    },[book,isLoading,loadBook,id,reviews,getReviews,needUpdate])
+
 
   return (
 
@@ -87,6 +99,7 @@ const BookPage = props => {
     </div>
   );
 }
+
 const mapStateToProps = state => {
   return {
     book: state.currentBook,

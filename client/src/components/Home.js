@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import BookData from '../BookData';
 import {connect} from 'react-redux'; 
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
@@ -75,6 +77,7 @@ function Home(props) {
                     : <h2>Loading...</h2>
                 }
             </div>
+            <Link to="/displaybooks">Display All Books</Link>
             <Icondiv>{element2}{element3}{element4}</Icondiv>
         </Homediv>
     )
