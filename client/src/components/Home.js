@@ -124,31 +124,17 @@ const SearchBar = styled.input`
     border-radius:5px;
 `;
 function Home(props) {
-    // const {books,needUpdate,isLoading,loadBooks} = props;
+    const {books,needUpdate,isLoading,loadBooks} = props;
     const [search, setSearch] = useState("");
     function handleChange(event) {
         setSearch(event.target.value);     
     }
         
-    // useEffect(() => {if((books.length === 0 && !isLoading) || needUpdate) {
-    //     loadBooks()
-    // }}, [books,needUpdate,isLoading,loadBooks]);
+    useEffect(() => {if((books.length === 0 && !isLoading) || needUpdate) {
+        loadBooks()
+    }}, [books,needUpdate,isLoading,loadBooks]);
 
     
-    const [books, setBooks] = useState([]);
-    const [formula, setFormula] = useState([]);
-    useEffect(() => { 
-
-        axiosWithAuth()
-        .get(`https://bookr-bw-app.herokuapp.com/api/books` )
-        .then((res) => { 
-            console.log(res); 
-            setBooks(res.data);
-        })
-        .catch((err) => { 
-            console.log("couldn't fetch data", err); 
-        })
-    },[])
 
     
 
@@ -166,8 +152,7 @@ function Home(props) {
             </Jumbotron>
             <SearchBar type='text' placeholder='Search...' onChange={handleChange}/>
             <div className='book-list'>
-            {/* {BookData.length !== 0 ?
-                        BookData. */}
+            
                 {books.length !== 0 ? 
                     books.filter(book => search !== '' ? book.title.toLowerCase().includes(search.toLowerCase()) : true )
                         .map((item,i)=><Book key={i} book={item}/>)
@@ -175,7 +160,6 @@ function Home(props) {
                 }
             </div>
             <Icondiv>{element2}{element3}{element4}</Icondiv>
-            <Link to="/DisplayBooks">Display Books</Link>
         </Homediv>
     )
 }
