@@ -45,7 +45,6 @@ const App = props => {
       </NavBookr>
       
       <Route path='/login' component={Login}/>
-      {/* <PrivateRoute path="/DisplayBooks" component={DisplayBooks}/> */}
       <PrivateRoute path='/home' component={Home}/>
       <PrivateRoute path='/books/:id' component={BookPage}/>
       <PrivateRoute path='/displaybooks' component={DisplayBooks}/>

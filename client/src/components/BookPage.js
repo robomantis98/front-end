@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Modal, ModalHeader} from 'reactstrap';
 import Review from './Review';
 import {deleteBook, loadBook, getReviews} from '../actions';
-import Book from './Book';
 import styled from 'styled-components';
 import ReviewCard from './ReviewCard';
 
@@ -69,7 +68,13 @@ const BookPage = props => {
         props.deleteBook(props.book.id);
     }
 
-
+    useEffect(()=>{
+        if(!isLoading && (!book || book.id != id))
+        {
+            loadBook(id)
+        }
+    
+    },[id,book,isLoading])
 
   return (
 
@@ -93,7 +98,7 @@ const BookPage = props => {
             <ModalHeader toggle={toggle}>What did you think of this book?</ModalHeader>
             <Review book={book} toggle={toggle}/>
         </Modal>
-        {book 
+        {reviews 
             ? reviews.filter(review=>review.books_id === book.id).map((review,index)=><ReviewCard key={index} review={review}/>)
             : null
         }
