@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from 'reactstrap';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {submitReview} from '../actions';
 import ReactStars from 'react-stars';
-
+// import { axiosWithAuth } from '../utils/axiosWithAuth';
 const ReviewContainer = styled.div`
 border:2px solid red;
 display:flex;
@@ -35,7 +35,7 @@ const Review = props => {
   const ratingChanged = (newRating) => {
     console.log(newRating)
   }
-
+   
     return (
       <ReviewContainer>
 			<form onSubmit={submitForm}>
@@ -47,7 +47,7 @@ const Review = props => {
         onChange={ratingChanged}
         size={24}
         color2={'#ffd700'}
-        half={false}
+        half={true}
         required
         />
         
@@ -56,7 +56,7 @@ const Review = props => {
 					type="textbox"
 					name="review"
 					placeholder="Review"
-					value={newPost.review !=0 ? newPost.review : 4}
+					value={newPost.review !=0 ? newPost.review : 3}
           onChange={changeHandler}
           required
 				/>

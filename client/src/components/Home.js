@@ -10,6 +10,7 @@ import Book from './Book';
 import { Jumbotron, Button } from 'reactstrap';
 import bookrImg from './BookrJumbotron.jpg'
 import {Route, Link} from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
@@ -123,17 +124,35 @@ const SearchBar = styled.input`
     border-radius:5px;
 `;
 function Home(props) {
-    const {books,needUpdate,isLoading,loadBooks} = props;
+    // const {books,needUpdate,isLoading,loadBooks} = props;
     const [search, setSearch] = useState("");
     function handleChange(event) {
         setSearch(event.target.value);     
     }
         
-    useEffect(() => {if((books.length === 0 && !isLoading) || needUpdate) {
-        loadBooks()
-    }}, [books,needUpdate,isLoading,loadBooks]);
+    // useEffect(() => {if((books.length === 0 && !isLoading) || needUpdate) {
+    //     loadBooks()
+    // }}, [books,needUpdate,isLoading,loadBooks]);
 
     
+    const [books, setBooks] = useState([]);
+    const [formula, setFormula] = useState([]);
+    useEffect(() => { 
+
+        axiosWithAuth()
+        .get(`https://bookr-bw-app.herokuapp.com/api/books` )
+        .then((res) => { 
+            console.log(res); 
+            setBooks(res.data);
+        })
+        .catch((err) => { 
+            console.log("couldn't fetch data", err); 
+        })
+    },[])
+
+    
+
+
     return (
         <Homediv className='Home'>
             <Jumbotron style={{backgroundImage: `url(${bookrImg})`}}>

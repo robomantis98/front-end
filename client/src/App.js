@@ -44,7 +44,7 @@ const App = props => {
       <PrivateRoute path="/DisplayBooks" component={DisplayBooks}/>
       <PrivateRoute path='/home' component={Home}/>
       <PrivateRoute path='/books/:id' component={BookPage}/>
-
+      
     </div>
   );
 }
