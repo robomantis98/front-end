@@ -8,6 +8,8 @@ import Home from './components/Home';
 import BookPage from './components/BookPage';
 import styled from 'styled-components'; 
 import {setToken,logout} from './actions';
+import DisplayBooks from './components/DisplayBooks';
+
 const NavBookr = styled.div`
      width: 100%; 
      height: 100px; 
@@ -19,13 +21,16 @@ const NavBookr = styled.div`
      justify-content: center;
      justify-content: space-around; 
      align-items: center; 
-
 `
 
 const App = props => {
   const {setToken} = props
   useEffect(()=>{
     localStorage.getItem('token') ? setToken(true) : setToken(false)
+    //load Books
+    //load Reviews
+      // get AVG
+    
   },[setToken])
   return (
     <div className="App">
@@ -42,6 +47,7 @@ const App = props => {
       <Route path='/login' component={Login}/>
       <PrivateRoute path='/home' component={Home}/>
       <PrivateRoute path='/books/:id' component={BookPage}/>
+      <PrivateRoute path='/displaybooks' component={DisplayBooks}/>
     </div>
   );
 }
