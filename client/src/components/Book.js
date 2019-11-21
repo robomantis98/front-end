@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {deleteBook} from '../actions';
+import ReactStars from 'react-stars';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 const BookCard = styled.div`
     width: 95%;
     max-width:500px;
@@ -28,16 +30,50 @@ const BookCard = styled.div`
             background:red;
         }
     }
-    .card-head a {
-        text-decoration: none;
-        color: black;
+    .star {
+      text-align:center;
+      margin: 0 31%;
     }
-`
 
+    img{
+      max-width:95%;
+    }
+
+    img {
+        max-width: 95%;
+    }
+`       
+const ratingChanged = (newRating) => {
+    console.log(newRating)
+  }
 const Book = props => {
-    const removeBook = event => {
+    
+    const removeBook = () => {
         props.deleteBook(props.book.id);
     }
+    
+  
+  const [formula, setFormula] = useState([]);
+  useEffect(() => {
+        axiosWithAuth()
+        .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${props.book.id}`)
+        .then((res) => {
+            setFormula(res.data);
+        })    
+
+        .catch((err) => { 
+            console.log("couldn't fetch data", err); 
+        })
+    },[props.book.id])
+    console.log("formula is: ", formula);
+
+    function StarFormula(){
+        let total = formula.reduce((acc, star) => acc + star.rating , 0);
+        let median = total/formula.length;
+        console.log("length", formula.length);
+        return median;
+    }
+    
     return (
         
             <BookCard>
@@ -45,8 +81,20 @@ const Book = props => {
                     <div className='deleteButton' onClick={removeBook}><b>X</b></div>
                     <div className='card-head'>
                         <Link to={`/books/${props.book.id}`}><h2>{props.book.title}</h2></Link>
+                        <img src={props.book.image_url}/>
                     </div>
                     <div className='card-body'>
+                    <ReactStars className="star"
+                        name="rating"
+                        value={StarFormula()}
+                        count={5}
+                        onChange={ratingChanged}
+                        edit = {false}
+                        size={32}
+                        color2={'#ffd700'}
+                        half={true}
+                        required
+                    />
                         <h3>{props.book.author}</h3>
                         <p>{props.book.description}</p>
                     </div>

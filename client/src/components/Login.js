@@ -42,7 +42,7 @@ const LoginForm = styled.form`
     }
 `
 const InputForm= styled.input`
-    background-color: #d2bba0;
+    background-color: #eee;
     border: 2px solid #9f7e69;
     padding-left: 10px; 
     width: 300px;
@@ -110,7 +110,7 @@ const Login = props => {
                 <Styledbutton disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</Styledbutton>
                 <Styledbutton disabled={props.isAuthenticating} onClick={handleRegister}>Sign-Up</Styledbutton>
             </div>
-            {props.token?<Redirect to='/home'/>:null}
+            {props.token? <Redirect to='/home'/>:null}
 
         </LoginForm>
     )

@@ -22,9 +22,12 @@
 }
 
 .BookrLinks{
-
   text-decoration: none;
   color: #d2bba0;
+}
+.BookrLinks:hover{
+  text-decoration:none;
+  color: #9f7e69
 }
 
 .InputForm{
@@ -35,7 +38,7 @@
     margin-bottom: 150px;
 }
 input:focus, textarea:focus{
-  outline:none;
+  outline: none;
 }
 button:focus {
 
