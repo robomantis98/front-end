@@ -25,6 +25,10 @@
   text-decoration: none;
   color: #d2bba0;
 }
+.BookrLinks:hover{
+  text-decoration:none;
+  color: #9f7e69
+}
 
 .InputForm{
 

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {deleteBook} from '../actions';
 import ReactStars from 'react-stars';
+<<<<<<< HEAD
+=======
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+>>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 const BookCard = styled.div`
     width: 95%;
     max-width:500px;
@@ -33,13 +37,30 @@ const BookCard = styled.div`
         text-decoration: none;
         color: black;
     }
+<<<<<<< HEAD
 `;
+=======
+`       
+const ratingChanged = (newRating) => {
+    console.log(newRating)
+  }
+>>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 const Book = props => {
     
     const removeBook = event => {
         props.deleteBook(props.book.id);
     }
+    
+  
+  const [formula, setFormula] = useState([]);
+  useEffect(() => {
+        axiosWithAuth()
+        .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${props.book.id}`)
+        .then((res) => {
+            setFormula(res.data);
+        })    
 
+<<<<<<< HEAD
     return (       
         <BookCard>
             <div className='deleteButton' onClick={removeBook}><b>X</b></div>
@@ -51,6 +72,49 @@ const Book = props => {
                 <p>{props.book.description}</p>
             </div>
         </BookCard>
+=======
+        .catch((err) => { 
+            console.log("couldn't fetch data", err); 
+        })
+    },[props.book.id])
+    console.log("formula is: ", formula);
+
+    function StarFormula(){
+        let total = formula.reduce((acc, star) => acc + star.rating , 0);
+        let median = total/formula.length;
+        console.log("length", formula.length);
+        return median;
+    }
+    
+    return (
+        
+            <BookCard>
+                
+                    <div className='deleteButton' onClick={removeBook}><b>X</b></div>
+                    <div className='card-head'>
+                        <Link to={`/books/${props.book.id}`}><h2>{props.book.title}</h2></Link>
+                    </div>
+                    <div className='card-body'>
+                        <h3>{props.book.author}</h3>
+                        <p>{props.book.description}</p>
+                    </div>
+                    <div>
+                        <img src={props.book.image_url}/>
+                    </div>
+                    <ReactStars
+                        name="rating"
+                        value={StarFormula()}
+                        count={5}
+                        onChange={ratingChanged}
+                        edit = {false}
+                        size={24}
+                        color2={'#ffd700'}
+                        half={true}
+                        required
+                    />
+                
+            </BookCard>
+>>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
     );
 }
 const mapStateToProps = state => {

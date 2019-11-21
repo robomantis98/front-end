@@ -7,7 +7,11 @@ import Login from './components/Login';
 import Home from './components/Home';
 import BookPage from './components/BookPage';
 import styled from 'styled-components'; 
+<<<<<<< HEAD
 import {setToken,logout} from './actions'
+=======
+import {setToken,logout} from './actions';
+>>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
 import DisplayBooks from './components/DisplayBooks';
 const NavBookr = styled.div`
      width: 100%; 
@@ -20,7 +24,7 @@ const NavBookr = styled.div`
      justify-content: center;
      justify-content: space-around; 
      align-items: center; 
-
+     
 `
 
 const App = props => {
@@ -45,9 +49,14 @@ const App = props => {
       </NavBookr>
       
       <Route path='/login' component={Login}/>
+      {/* <PrivateRoute path="/DisplayBooks" component={DisplayBooks}/> */}
       <PrivateRoute path='/home' component={Home}/>
       <PrivateRoute path='/books/:id' component={BookPage}/>
+<<<<<<< HEAD
       <PrivateRoute path='/displaybooks' component={DisplayBooks}/>
+=======
+      
+>>>>>>> 419cb0c7aff84c665fe7e8914d3f6dc7d6159445
     </div>
   );
 }
