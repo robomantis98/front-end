@@ -32,7 +32,7 @@ const BookCard = styled.div`
     }
     .star {
       text-align:center;
-      margin: 0 35%;
+      margin: 0 31%;
     }
 
     img{
