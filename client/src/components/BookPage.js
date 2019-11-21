@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Modal, ModalHeader} from 'reactstrap';
 import Review from './Review';
-import {deleteBook, loadBook, getReviews} from '../actions';
+import {deleteBook, loadBook} from '../actions';
 import styled from 'styled-components';
 import ReviewCard from './ReviewCard';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
 const ContainerCardDiv = styled.div`
@@ -48,6 +49,8 @@ const Button = styled.div`
 
 
 const BookPage = props => {
+
+  const [reviews, setReviews] = useState(null);
   
     const id = Number(props.match.params.id);
     const {
@@ -55,8 +58,6 @@ const BookPage = props => {
         book,
         isLoading,
         loadBook,
-        reviews,
-        getReviews,
         needUpdate
     } = props;
 
@@ -65,7 +66,7 @@ const BookPage = props => {
     const toggle = () => setModal(!modal);
 
     const removeBook = () => {
-        props.deleteBook(props.book.id);
+        props.deleteBook(id);
     }
 
     useEffect(()=>{
@@ -75,6 +76,18 @@ const BookPage = props => {
         }
     
     },[id,book,isLoading])
+
+    useEffect(() => {
+      axiosWithAuth()
+      .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${id}`)
+      .then((res) => {
+          setReviews(res.data);
+      })    
+
+      .catch((err) => { 
+          console.log("couldn't fetch data", err); 
+      })
+  },[id])
 
   return (
 
@@ -94,13 +107,15 @@ const BookPage = props => {
             </div>
             : null
         }  
+
+
         <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle}>What did you think of this book?</ModalHeader>
             <Review book={book} toggle={toggle}/>
         </Modal>
         {reviews 
-            ? reviews.filter(review=>review.books_id === book.id).map((review,index)=><ReviewCard key={index} review={review}/>)
-            : null
+            ? reviews.map((review,index)=><ReviewCard key={index} review={review}/>)
+            : 'no reviews'
         }
     </div>
   );
@@ -110,8 +125,7 @@ const mapStateToProps = state => {
   return {
     book: state.currentBook,
     isLoading: state.isLoading,
-    reviews: state.reviews,
     needUpdate: state.needUpdate
   }
 }
-export default connect(mapStateToProps,{deleteBook, loadBook, getReviews})(BookPage);
+export default connect(mapStateToProps,{deleteBook, loadBook})(BookPage);
