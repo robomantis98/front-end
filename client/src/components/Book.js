@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {deleteBook} from '../actions';
-import ReactStars from 'react-stars'
+//import ReactStars from 'react-stars';
 const BookCard = styled.div`
     width: 95%;
     max-width:500px;
@@ -33,29 +33,24 @@ const BookCard = styled.div`
         text-decoration: none;
         color: black;
     }
-`
-const ratingChanged = (newRating) => {
-    console.log(newRating)
-  }
+`;
 const Book = props => {
+    
     const removeBook = event => {
         props.deleteBook(props.book.id);
     }
 
-    return (
-        
-            <BookCard>
-                
-                    <div className='deleteButton' onClick={removeBook}><b>X</b></div>
-                    <div className='card-head'>
-                        <Link to={`/books/${props.book.id}`}><h2>{props.book.title}</h2></Link>
-                    </div>
-                    <div className='card-body'>
-                        <h3>{props.book.author}</h3>
-                        <p>{props.book.description}</p>
-                    </div>
-                
-            </BookCard>
+    return (       
+        <BookCard>
+            <div className='deleteButton' onClick={removeBook}><b>X</b></div>
+            <div className='card-head'>
+                <Link to={`/books/${props.book.id}`}><h2>{props.book.title}</h2></Link>
+            </div>
+            <div className='card-body'>
+                <h3>{props.book.author}</h3>
+                <p>{props.book.description}</p>
+            </div>
+        </BookCard>
     );
 }
 const mapStateToProps = state => {

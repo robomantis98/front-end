@@ -26,6 +26,10 @@ const App = props => {
   const {setToken} = props
   useEffect(()=>{
     localStorage.getItem('token') ? setToken(true) : setToken(false)
+    //load Books
+    //load Reviews
+      // get AVG
+    
   },[setToken])
   return (
     <div className="App">
