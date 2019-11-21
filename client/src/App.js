@@ -38,13 +38,13 @@ const App = props => {
         <Link className = "BookrLinks" to ="/home"> Home </Link>
         <Link 
           className = "BookrLinks" 
-          to="/login" 
+          to="/" 
           onClick={props.token?props.logout:null}>
             {props.token?'Log Out':'Log In'}
         </Link>
       </NavBookr>
       
-      <Route path='/login' component={Login}/>
+      <Route exact path='/' component={Login}/>
       <PrivateRoute path='/home' component={Home}/>
       <PrivateRoute path='/books/:id' component={BookPage}/>
       <PrivateRoute path='/displaybooks' component={DisplayBooks}/>
