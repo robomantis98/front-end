@@ -33,7 +33,7 @@ const BookCard = styled.div`
         text-decoration: none;
         color: black;
     }
-`
+`       
 const ratingChanged = (newRating) => {
     console.log(newRating)
   }
@@ -53,6 +53,9 @@ const Book = props => {
                     <div className='card-body'>
                         <h3>{props.book.author}</h3>
                         <p>{props.book.description}</p>
+                    </div>
+                    <div>
+                        <img src={props.book.image_url}/>
                     </div>
                 
             </BookCard>

@@ -9,7 +9,7 @@ import {loadBooks} from '../actions';
 import Book from './Book';
 import { Jumbotron, Button } from 'reactstrap';
 import bookrImg from './BookrJumbotron.jpg'
-
+import {Route, Link} from 'react-router-dom';
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />
 const element3 = <FontAwesomeIcon size="3x" icon={faReact} />
@@ -156,6 +156,7 @@ function Home(props) {
                 }
             </div>
             <Icondiv>{element2}{element3}{element4}</Icondiv>
+            <Link to="/DisplayBooks">Display Books</Link>
         </Homediv>
     )
 }

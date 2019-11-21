@@ -56,7 +56,7 @@ const Review = props => {
 					type="textbox"
 					name="review"
 					placeholder="Review"
-					value={newPost.review}
+					value={newPost.review !=0 ? newPost.review : 4}
           onChange={changeHandler}
           required
 				/>
