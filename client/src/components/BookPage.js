@@ -7,12 +7,10 @@ import {deleteBook, loadBook} from '../actions';
 import Book from './Book';
 import styled from 'styled-components';
 
-
-const ContainerCardDiv = styled.div`
-border-bottom:2px solid grey;
-margin:50px 50px;
-padding: 50px;
+const CardDiv = styled.div`
+margin:100px 50px;
 display:flex;
+flex-direction: column;
 justify-content: flex-start;
 align-items:center;
 `;
@@ -57,15 +55,17 @@ const BookPage = props => {
     <>
 
       {book? 
-      <ContainerCardDiv
-      key={book.id}>
-      <img src={book.image_url} alt="Book cover image"/>
-      <TextDiv>
-      <h3>{book.title}</h3><br/>
-      <h5>{book.author}</h5><br/>
-      <h5>{book.description}</h5><br/>
-      </TextDiv>
-      </ContainerCardDiv>: console.log(book)}
+      <div>
+        <img src={book.image_url} alt="Book cover image"/>
+        <div className='deleteButton' onClick={removeBook}><b>hi</b></div>
+        <div className='card-head'>
+          <h2>{book.title}</h2>
+        </div>
+        <div className='card-body'>
+            <h3>{book.author}</h3>
+            <p>{book.description}</p>
+        </div> 
+      </div>: console.log(book)}
 
 
 
