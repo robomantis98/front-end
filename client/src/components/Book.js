@@ -39,6 +39,7 @@ const ratingChanged = (newRating) => {
     console.log(newRating)
   }
 const Book = props => {
+    
     const removeBook = event => {
         props.deleteBook(props.book.id);
     }
