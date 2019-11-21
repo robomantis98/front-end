@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import BookData from '../BookData';
 import {connect} from 'react-redux'; 
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
@@ -8,8 +7,7 @@ import styled from 'styled-components';
 import {loadBooks} from '../actions';
 import Book from './Book';
 import { Jumbotron, Button } from 'reactstrap';
-import bookrImg from './BookrJumbotron.jpg'
-import {Route, Link} from 'react-router-dom';
+import bookrImg from './BookrJumbotron.jpg';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 // const element = <FontAwesomeIcon size="3x" icon={faBookReader} />
 const element2 = <FontAwesomeIcon size="3x" icon={faAmazon} />

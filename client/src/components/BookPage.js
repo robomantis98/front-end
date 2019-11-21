@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Modal, ModalHeader} from 'reactstrap';
 import Review from './Review';
-import {deleteBook, loadBook} from '../actions';
+import {deleteBook, loadBook, getReviews} from '../actions';
 import Book from './Book';
 import styled from 'styled-components';
+import ReviewCard from './ReviewCard';
 
 
 const ContainerCardDiv = styled.div`

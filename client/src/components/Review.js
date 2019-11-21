@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Button} from 'reactstrap';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {submitReview} from '../actions';
