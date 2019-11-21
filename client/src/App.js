@@ -8,7 +8,7 @@ import Home from './components/Home';
 import BookPage from './components/BookPage';
 import styled from 'styled-components'; 
 import {setToken,logout} from './actions';
-import DisplayBooks from './components/DisplayBooks';
+
 const NavBookr = styled.div`
      width: 100%; 
      height: 100px; 
@@ -41,7 +41,6 @@ const App = props => {
       </NavBookr>
       
       <Route path='/login' component={Login}/>
-      {/* <PrivateRoute path="/DisplayBooks" component={DisplayBooks}/> */}
       <PrivateRoute path='/home' component={Home}/>
       <PrivateRoute path='/books/:id' component={BookPage}/>
       
