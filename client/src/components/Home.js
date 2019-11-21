@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {a} from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {faAmazon, faReact, faNodeJs } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
@@ -37,6 +37,10 @@ const Homediv = styled.div`
             align-items: flex-start;
         }
     }
+    div .buttonText{
+      color:white;
+      text-decoration:none;
+    }
     
 `;
 const SearchBar = styled.input`
@@ -66,7 +70,7 @@ function Home(props) {
                 <hr className="my-2" />
                 <p style={{color:`#f7ffe0`}}>Did you know there are about 129,864,880 books in the entire world!? Review Books</p>
                 <p className="lead">
-                <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}>Learn More</Button>
+                <Button color="primary" style={{backgroundColor:`#9f7e69`, border: `none`}}><a className="buttonText" href="https://cranky-leakey-7e00c6.netlify.com/">About Us</a></Button>
                 </p>
             </Jumbotron>
             <SearchBar type='text' placeholder='Search...' onChange={handleChange}/>
@@ -77,7 +81,7 @@ function Home(props) {
                     : <h2>Loading...</h2>
                 }
             </div>
-            <Link to="/displaybooks">Display All Books</Link>
+            <a to="/displaybooks">Display All Books</a>
             <Icondiv>{element2}{element3}{element4}</Icondiv>
         </Homediv>
     )

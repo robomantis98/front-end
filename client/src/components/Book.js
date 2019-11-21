@@ -30,9 +30,13 @@ const BookCard = styled.div`
             background:red;
         }
     }
-    .card-head a {
-        text-decoration: none;
-        color: black;
+    .star {
+      text-align:center;
+      margin: 0 35%;
+    }
+
+    img{
+      max-width:95%;
     }
 
     img {
@@ -77,25 +81,23 @@ const Book = props => {
                     <div className='deleteButton' onClick={removeBook}><b>X</b></div>
                     <div className='card-head'>
                         <Link to={`/books/${props.book.id}`}><h2>{props.book.title}</h2></Link>
-                    </div>
-                    <div className='card-body'>
-                        <h3>{props.book.author}</h3>
-                        <p>{props.book.description}</p>
-                    </div>
-                    <div>
                         <img src={props.book.image_url}/>
                     </div>
-                    <ReactStars
+                    <div className='card-body'>
+                    <ReactStars className="star"
                         name="rating"
                         value={StarFormula()}
                         count={5}
                         onChange={ratingChanged}
                         edit = {false}
-                        size={24}
+                        size={32}
                         color2={'#ffd700'}
                         half={true}
                         required
                     />
+                        <h3>{props.book.author}</h3>
+                        <p>{props.book.description}</p>
+                    </div>
                 
             </BookCard>
     );

@@ -7,27 +7,27 @@ import styled from 'styled-components';
 import ReviewCard from './ReviewCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 
-
-const ContainerCardDiv = styled.div`
+const SingleBookContainer = styled.div`
 border-bottom:2px solid grey;
-margin:50px 50px;
-padding: 50px;
+margin:10px;
+padding-bottom:20px;
 display:flex;
-justify-content: flex-start;
+flex-direction:row;
 align-items:center;
 `;
 
-const TextDiv = styled.div`
+const SingleBookContent = styled.div`
 display:flex;
-justify-content: center;
 flex-direction:column;
+align-items:center;
+height:100%;
 `;
 
 const Button = styled.div`
     border-radius: 4px;
     color: white;
-    width: 110px;
-    height: 30px;
+    width: 200px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +46,13 @@ const Button = styled.div`
     }
 }
 `
+const ReviewSection = styled.div`
+  h1{
+    border-bottom: grey 1px solid;
+    padding-bottom: 15px;
+    margin: 0 10px 10px;
+  }
+`;
 
 
 const BookPage = props => {
@@ -93,18 +100,18 @@ const BookPage = props => {
 
     <div className='book-page'>
         {book 
-            ? <div>
-        
-                <div className='card-head'>
-                    <h2>{book.title}</h2>
-                </div>
-                <div className='card-body'>
-                    <h3>{book.author}</h3>
-                    <p>{book.description}</p>
-                    <Button className='green' onClick={toggle}>Add Review</Button>
-                    <Button className='red' onClick={removeBook}>Delete</Button>
-                </div> 
-            </div>
+            ?
+            <SingleBookContainer>
+              <div>
+              <img src={book.image_url}/>
+              </div>
+                <SingleBookContent>
+                  <h2>{book.title}</h2>
+                  <h3>{book.author}</h3>
+                  <p>{book.description}</p>
+                  <Button className='green' onClick={toggle}>Add Review</Button>
+                </SingleBookContent>
+              </SingleBookContainer>
             : null
         }  
 
@@ -113,10 +120,13 @@ const BookPage = props => {
             <ModalHeader toggle={toggle}>What did you think of this book?</ModalHeader>
             <Review book={book} toggle={toggle}/>
         </Modal>
+        <ReviewSection>
+          <h1>Reviews</h1>
         {reviews 
             ? reviews.map((review,index)=><ReviewCard key={index} review={review}/>)
             : 'no reviews'
-        }
+          }
+        </ReviewSection>
     </div>
   );
 }

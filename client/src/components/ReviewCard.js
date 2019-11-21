@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactStars from 'react-stars';
-//import styled from 'styled-components';
+import styled from 'styled-components';
+
+const ReviewContainer = styled.div`
+display:flex;
+flex-direction: column;
+align-items:center;
+`;
 
 const ReviewCard = props => {
     const {review} = props;
     return (
-        <div>
+        <ReviewContainer>
             <h2>{review.username}</h2>
             <ReactStars
                 name="rating"
@@ -18,7 +24,7 @@ const ReviewCard = props => {
             />
             <p>{review.review}</p>
             
-        </div>
+        </ReviewContainer>
     );
 }
 export default ReviewCard;
