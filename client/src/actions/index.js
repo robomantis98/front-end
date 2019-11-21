@@ -71,9 +71,9 @@ export const getReviews = id => dispatch => {
         .then(res=>dispatch({type:GET_REVIEWS_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:GET_REVIEWS_FAILURE,payload:err}))
 }
-export const submitReview = formData => dispatch => {
+export const submitReview = (formData, id) => dispatch => {
     dispatch({type:SUBMIT_REVIEW_REQUEST,payload:formData})
-    axiosWithAuth().post(`/api/reviews/${formData.id}`)
+    axiosWithAuth().post(`/api/reviews/${id}`,formData)
         .then(res=>dispatch({type:SUBMIT_REVIEW_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:SUBMIT_REVIEW_FAILURE,payload:err}))
 }

@@ -8,7 +8,7 @@ const ReviewContainer = styled.div`
 display:flex;
 flex-direction:column;
   form .stars {
-    width:30%;
+    width:40%;
     margin: 10px auto;
   }
 
@@ -45,14 +45,14 @@ const Review = props => {
     if(newPost.rating !== 0 && newPost.review !== "")
     {
       console.log(props.book.id);
-      console.log(props.bookScores);
-      //props.submitReview(
-      //   {
-      //     books_id:props.book.id, 
-      //     rating:props.rating, 
-      //     review:props.review
-      //   }
-      // );
+      // console.log(props.bookScores);
+      props.submitReview(
+        { 
+          rating:newPost.rating, 
+          review:newPost.review
+        },
+        props.book.id
+      );
       props.toggle();
     }
     
