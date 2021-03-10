@@ -23,7 +23,7 @@ function DisplayBooks(){
 
   useEffect(() => {
     axiosWithAuth()
-    .get('http://localhost:3000/api/books')
+    .get('http://172.105.156.24:3000/api/books')
     .then((res) => {
       console.log(res.data)
       setBooks(res.data)

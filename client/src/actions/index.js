@@ -16,13 +16,13 @@ export const LOGOUT = 'LOGOUT';
 
 export const loginRequest = userData =>  dispatch => {
     dispatch({type:LOGIN_REQUEST,payload:userData});
-    axios.post('https://localhost:3300/api/users/login',userData)
+    axios.post('https://172.105.156.24:3300/api/users/login',userData)
         .then(res=>dispatch({type:LOGIN_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:LOGIN_FAILURE,payload:err}));
 }
 export const registerRequest = userData => dispatch => {
     dispatch({type:REGISTER_REQUEST,payload:userData});
-    axios.post('https://localhost:3300/api/users/register',userData)
+    axios.post('https://172.105.156.24:3300/api/users/register',userData)
         .then(res=>dispatch({type:REGISTER_SUCCESS,payload:res.data}))
         .catch(err=>dispatch({type:REGISTER_FAILURE,payload:err}));
 }
