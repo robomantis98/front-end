@@ -23,7 +23,7 @@ function DisplayBooks(){
 
   useEffect(() => {
     axiosWithAuth()
-    .get('https://bookr-bw-app.herokuapp.com/api/books')
+    .get('http://localhost:3000/api/books')
     .then((res) => {
       console.log(res.data)
       setBooks(res.data)

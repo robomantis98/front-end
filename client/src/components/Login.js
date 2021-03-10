@@ -107,8 +107,10 @@ const Login = props => {
                 onChange={handleForm}
             />
             <div className='wrapper'>
-                <Styledbutton disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</Styledbutton>
-                <Styledbutton disabled={props.isAuthenticating} onClick={handleRegister}>Sign-Up</Styledbutton>
+            <Styledbutton disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</Styledbutton>
+            <Styledbutton disabled={props.isAuthenticating} onClick={handleRegister}>Sign-Up</Styledbutton>
+                {/* <Styledbutton  onClick={handleLogin}>Sign-In</Styledbutton>
+                <Styledbutton  onClick={handleRegister}>Sign-Up</Styledbutton> */}
             </div>
             {props.token? <Redirect to='/home'/>:null}
 

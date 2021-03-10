@@ -86,7 +86,7 @@ const BookPage = props => {
 
     useEffect(() => {
       axiosWithAuth()
-      .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${id}`)
+      .get(`https://localhost:3000/api/reviews/${id}`)
       .then((res) => {
           setReviews(res.data);
       })    

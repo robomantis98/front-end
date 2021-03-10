@@ -56,7 +56,8 @@ const Book = props => {
   const [formula, setFormula] = useState([]);
   useEffect(() => {
         axiosWithAuth()
-        .get(`https://bookr-bw-app.herokuapp.com/api/reviews/${props.book.id}`)
+        // bookr-bw-app.herokuapp.com
+        .get(`https://localhost:3000/api/reviews/${props.book.id}`)
         .then((res) => {
             setFormula(res.data);
         })    
